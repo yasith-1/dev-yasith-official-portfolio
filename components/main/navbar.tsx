@@ -55,6 +55,7 @@ export const Navbar = () => {
 
         {/* Social Icons (Web) */}
         <div className="hidden md:flex flex-row gap-5">
+          {/* <span className="text-white">DEBUG</span> */}
           {SOCIALS.map(({ link, name, icon: Icon }) => (
             <Link
               href={link}

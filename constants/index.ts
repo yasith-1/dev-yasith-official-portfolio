@@ -1,10 +1,11 @@
-import { FaYoutube, FaFacebook } from "react-icons/fa";
+import { FaYoutube, FaFacebook, FaMedium } from "react-icons/fa";
 import {
   RxDiscordLogo,
   RxGithubLogo,
   RxInstagramLogo,
   RxTwitterLogo,
   RxLinkedinLogo,
+  RxBlendingMode,
 } from "react-icons/rx";
 
 export const SKILL_DATA = [
@@ -86,6 +87,11 @@ export const SOCIALS = [
     name: "GitHub",
     icon: RxGithubLogo,
     link: "https://github.com/yasith-1",
+  },
+  {
+    name: "Medium",
+    icon: FaMedium,
+    link: "https://medium.com/@yasithofficialart",
   },
 ] as const;
 
@@ -235,7 +241,7 @@ export const PROJECTS = [
     title: "Burger Shop POS",
     description:
       "Web based POS focused on DOM manipulation and UI/UX design using HTML, JavaScript, and CSS.",
-    image: "/projects/project-4.png",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
     link: "https://github.com/yashith-wd",
   },
 ] as const;
@@ -274,6 +280,11 @@ export const FOOTER_DATA = [
         icon: RxGithubLogo,
         link: "https://github.com/yashith-wd",
       },
+      {
+        name: "Medium",
+        icon: FaMedium,
+        link: "https://medium.com/@yasithofficialart",
+      },
     ],
   },
   {
@@ -304,5 +315,5 @@ export const NAV_LINKS = [
 ] as const;
 
 export const LINKS = {
-  sourceCode: "https://github.com/sanidhyy/space-portfolio",
+  sourceCode: "https://github.com/yasith-1",
 };
