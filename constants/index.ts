@@ -148,6 +148,12 @@ export const FRONTEND_SKILL = [
 
 export const BACKEND_SKILL = [
   {
+    skill_name: "Java",
+    image: "java.png", // Placeholder
+    width: 80,
+    height: 80,
+  },
+  {
     skill_name: "Node.js",
     image: "node.png",
     width: 80,
@@ -170,12 +176,6 @@ export const BACKEND_SKILL = [
     image: "firebase.png",
     width: 55,
     height: 55,
-  },
-  {
-    skill_name: "PostgreSQL",
-    image: "postgresql.png",
-    width: 70,
-    height: 70,
   },
   {
     skill_name: "MySQL",
@@ -219,30 +219,30 @@ export const PROJECTS = [
   {
     title: "Hotel POS Management System",
     description:
-      "Multi-company POS system built with layered architecture using Spring Boot and React (Redux). Implemented real-time updates via WebSocket, data visualization with chart.js, and automated database migrations with Flyway.",
+      "Multi-company POS system built with layered architecture using Spring Boot (JDBC Template, JWT authentication) and React (Redux state management). Implemented real-time updates via WebSocket, automated database migrations with Flyway, and API documentation with Swagger.",
     image: "/projects/project-1.png",
-    link: "https://github.com/yashith-wd",
+    link: "https://github.com/yasith-1",
   },
   {
-    title: "Dev Docker",
+    title: "Dev Docrizor",
     description:
       "Project resource management system for organizing development assets such as diagrams, design files, database scripts, and tracking project tasks efficiently using React, Express, and MongoDB.",
     image: "/projects/project-2.png",
-    link: "https://github.com/yashith-wd",
+    link: "https://github.com/yasith-1",
   },
   {
     title: "Library Management System",
     description:
-      "Desktop application managing books, customers, and loans with report generation using Java, JavaFX, Jasper Report, and MySQL.",
+      "Desktop application managing books, customers, and fines with report generation using Java, JavaFX, Jasper Report, and MySQL.",
     image: "/projects/project-3.png",
-    link: "https://github.com/yashith-wd",
+    link: "https://github.com/yasith-1",
   },
   {
     title: "Burger Shop POS",
     description:
-      "Web based POS focused on DOM manipulation and UI/UX design using HTML, JavaScript, and CSS.",
+      "Web-based POS focused on DOM manipulation and UI/UX design using HTML, JavaScript, and CSS.",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
-    link: "https://github.com/yashith-wd",
+    link: "https://github.com/yasith-1",
   },
 ] as const;
 
@@ -251,14 +251,9 @@ export const FOOTER_DATA = [
     title: "Community",
     data: [
       {
-        name: "YouTube",
-        icon: FaYoutube,
-        link: "https://youtube.com",
-      },
-      {
         name: "GitHub",
         icon: RxGithubLogo,
-        link: "https://github.com",
+        link: "https://github.com/yasith-1",
       },
       {
         name: "Discord",
@@ -278,7 +273,7 @@ export const FOOTER_DATA = [
       {
         name: "GitHub",
         icon: RxGithubLogo,
-        link: "https://github.com/yashith-wd",
+        link: "https://github.com/yasith-1",
       },
       {
         name: "Medium",
@@ -299,21 +294,113 @@ export const FOOTER_DATA = [
   },
 ] as const;
 
+
+export const JOURNEY = [
+  {
+    title: "Intern Software Engineer",
+    location: "NEXOVA IT SOLUTIONS",
+    description: "Collaboration with a development team to build a POS system. Contributing as a Full-Stack Developer to both frontend and backend development using React and Spring Boot, with MySQL as the database. Involved in API integration & Testing, UI design, and applying OOP and clean code principles.",
+    icon: null,
+    date: "Sep 2025 - Present",
+  },
+  {
+    title: "Startup Tech Community Member",
+    location: "KreedX Development Club",
+    description: "Collaborated with a dynamic team at KreedX to deliver full-stack software solutions for multiple client-based projects. Took responsibility for both frontend and backend development using PHP and MySQL. Applied strong OOP principles.",
+    icon: null,
+    date: "June 2024 - Present",
+  },
+  {
+    title: "iCET ICD Developer Programme",
+    location: "Institute of Computer Engineering Technology (iCET)",
+    description: "Currently enrolled, developing expertise in enterprise and standalone application development with Java and Spring Boot. Building strong foundations in OOP, design patterns, and modern software architectures.",
+    icon: null,
+    date: "Nov 2024 - Present",
+  },
+  {
+    title: "Workshop: Git | GitHub",
+    location: "Pro Code Lab (PCL)",
+    description: "Covered every part of Git and GitHub that are used in real projects, including branching, merging, pull requests, and collaboration workflows.",
+    icon: null,
+    date: "March 2025",
+  },
+] as const;
+
+export const CERTIFICATIONS = [
+  {
+    title: "Kubernetes For Absolute Beginners",
+    issuer: "KodeKloud",
+    date: "2026",
+    image: "/skills/docker.png", // Using docker icon as placeholder for Kubernetes if not found
+  },
+  {
+    title: "Docker For Absolute Beginners",
+    issuer: "KodeKloud",
+    date: "2026",
+    image: "/skills/docker.png",
+  },
+  {
+    title: "Git | GitHub 8 Days Workshop",
+    issuer: "Pro Code Lab",
+    date: "2025",
+    image: "/skills/html.png", // Placeholder
+  },
+] as const;
+
 export const NAV_LINKS = [
   {
     title: "About me",
     link: "#about-me",
   },
   {
-    title: "Skills",
-    link: "#skills",
+    title: "Experience",
+    link: "#experience",
   },
   {
     title: "Projects",
     link: "#projects",
+  },
+  {
+    title: "Testimonials",
+    link: "#testimonials",
+  },
+  {
+    title: "Skills",
+    link: "#skills",
+  },
+  {
+    title: "Certifications",
+    link: "#certifications",
   },
 ] as const;
 
 export const LINKS = {
   sourceCode: "https://github.com/yasith-1",
 };
+
+export const TESTIMONIALS = [
+  {
+    name: "Praneeth Perera",
+    role: "Co-Founder - Nexova, Pega Certified Lead System Architect (CLSA | CSSA | CSA)",
+    text: "Yasith has a strong foundation in React and Java Spring Boot, and he quickly demonstrated his ability to build clean, scalable, and well-structured applications. His coding standards are excellent for an intern. He writes readable, maintainable code and shows a solid understanding of both frontend and backend architecture. Beyond his technical skills, what truly stands out is his presentation and communication ability. Yasith confidently explains complex technical concepts in a clear and structured manner, whether during internal demos. His ability to combine strong coding skills with effective communication makes him a valuable team member.",
+    image: "/testimonials/praneeth.png", // Paths for future images
+  },
+  {
+    name: "Prasad Ekanayake",
+    role: "Co-Founder - Nexova, Pega Certified Lead System Architect",
+    text: "I had the pleasure of supervising Yasith during his internship at Nexova, where he was a key contributor to the NexServe project. From day one, Yasith stood out for his technical curiosity and his ability to grasp complex systems quickly. On the NexServe project, he demonstrated impressive problem-solving skills and a proactive approach to development that went well beyond what is typically expected of an intern. He didn't just complete tasks; he consistently looked for ways to optimize workflows and improve the overall quality of the deliverables. What impressed me most was Yasith's professional maturity and his ability to collaborate effectively within a fast-paced team environment.",
+    image: "/testimonials/prasad.png",
+  },
+  {
+    name: "Sahan Weerasekera",
+    role: "Co-Founder - Nexova, Pega CLSA , MBA in IT (CSE)",
+    text: "Yasith's greatest strength is his ability to act as a true team player who brings people together. He maintains strong relationships with all team members and consistently contributes to a positive, collaborative team atmosphere. This quality, combined with his solid full-stack technical expertise in React and Java Spring Boot, makes him a well-rounded contributor who adds value both technically and culturally. His strong emotional intelligence enables him to work effectively across diverse personalities, while also translating business requirements into well-designed React front-end components and robust Spring Boot backend services.",
+    image: "/testimonials/sahan.png",
+  },
+  {
+    name: "Gihan Viraj Silva",
+    role: "Software Engineer",
+    text: "I had the pleasure of mentoring Yasith, and I'm impressed by his passion, curiosity, and dedication. He is a hard worker, a fast learner, and always eager to take on new challenges. Any team would benefit greatly from his drive and enthusiasm.",
+    image: "/testimonials/gihan.png",
+  }
+] as const;
