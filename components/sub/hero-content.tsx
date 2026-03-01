@@ -8,7 +8,8 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaWhatsapp,
-  FaGlobe
+  FaGlobe,
+  FaMedium
 } from "react-icons/fa";
 import { SiSalesforce } from "react-icons/si";
 
@@ -44,10 +45,10 @@ export const HeroContent = () => {
           variants={slideInFromLeft(0.5) as any}
           className="flex flex-col gap-1 mt-6"
         >
-          <h1 className="text-5xl lg:text-7xl font-bold text-white tracking-tight font-sans">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white tracking-tight font-sans">
             Yashith
           </h1>
-          <h1 className="text-5xl lg:text-7xl font-bold glow-text gradient-text-blue tracking-tight pb-2 font-sans">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold glow-text gradient-text-blue tracking-tight pb-2 font-sans">
             Prabhashwara
           </h1>
         </motion.div>
@@ -55,10 +56,10 @@ export const HeroContent = () => {
         {/* Headline */}
         <motion.div
           variants={slideInFromLeft(0.6) as any}
-          className="flex flex-row items-center gap-3 text-xl lg:text-3xl text-gray-300 font-medium font-sans"
+          className="flex flex-wrap items-center gap-3 text-lg sm:text-xl lg:text-3xl text-gray-300 font-medium font-sans"
         >
           <span className="opacity-70">I build</span>
-          <span className="text-white px-4 py-1.5 bg-white/5 rounded-xl border border-white/10 backdrop-blur-lg shadow-2xl">
+          <span className="text-white px-3 py-1.5 sm:px-4 sm:py-1.5 bg-white/5 rounded-xl border border-white/10 backdrop-blur-lg shadow-2xl">
             Scalable Enterprise Applications
           </span>
         </motion.div>
@@ -86,27 +87,36 @@ export const HeroContent = () => {
         {/* Action Buttons */}
         <motion.div
           variants={slideInFromLeft(1) as any}
-          className="flex flex-row items-center gap-5 mt-4"
+          className="flex flex-col sm:flex-row items-center gap-5 mt-4 w-full sm:w-auto"
         >
-          <a href="#projects" className="px-8 py-4 button-primary text-white cursor-pointer rounded-2xl font-semibold transition-all hover:scale-105 active:scale-95 flex items-center gap-3 shadow-lg shadow-purple-500/20">
+          <a href="#projects" className="w-full sm:w-auto px-8 py-4 button-primary text-white cursor-pointer rounded-2xl font-semibold transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3 shadow-lg shadow-purple-500/20">
             <SparklesIcon className="h-5 w-5 text-cyan-300" />
             View My Work
           </a>
-          <a href="/resume.pdf" target="_blank" className="px-8 py-4 bg-white/5 text-white cursor-pointer rounded-2xl font-semibold border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md">
+          <a href="/resume/Yashith_Prabhashwara_CV.pdf" download="Yashith_Prabhashwara_CV.pdf" className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white cursor-pointer rounded-2xl font-semibold border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md text-center">
             Download Resume
           </a>
         </motion.div>
 
-        {/* Social Icons */}
         <motion.div
           variants={slideInFromLeft(1.2) as any}
           className="flex flex-row gap-5 mt-10"
         >
-          <a href="https://github.com/yasith-1" target="_blank" className="social-icon group"><FaGithub className="text-xl group-hover:text-white transition-colors" /></a>
-          <a href="https://linkedin.com/in/yashith-prabhashwara" target="_blank" className="social-icon group"><FaLinkedin className="text-xl group-hover:text-blue-500 transition-colors" /></a>
-          <a href="mailto:yashith.wd@gmail.com" className="social-icon group"><FaEnvelope className="text-xl group-hover:text-red-400 transition-colors" /></a>
-          <a href="https://wa.me/94701410113" target="_blank" className="social-icon group"><FaWhatsapp className="text-xl group-hover:text-green-500 transition-colors" /></a>
-          <a href="https://github.com/yasith-1" target="_blank" className="social-icon group"><FaGlobe className="text-xl group-hover:text-cyan-400 transition-colors" /></a>
+          <a href="https://github.com/yasith-1" target="_blank" className="social-icon group">
+            <FaGithub className="text-xl text-gray-400 group-hover:text-white transition-colors" />
+          </a>
+          <a href="https://linkedin.com/in/yashith-prabhashwara" target="_blank" className="social-icon group">
+            <FaLinkedin className="text-xl text-gray-400 group-hover:text-blue-500 transition-colors" />
+          </a>
+          <a href="mailto:yashith.wd@gmail.com" className="social-icon group">
+            <FaEnvelope className="text-xl text-gray-400 group-hover:text-red-400 transition-colors" />
+          </a>
+          <a href="https://wa.me/94701410113" target="_blank" className="social-icon group">
+            <FaWhatsapp className="text-xl text-gray-400 group-hover:text-green-500 transition-colors" />
+          </a>
+          <a href="https://medium.com/@yasithofficialart" target="_blank" className="social-icon group">
+            <FaMedium className="text-xl text-gray-400 group-hover:text-cyan-400 transition-colors" />
+          </a>
         </motion.div>
       </div>
 
@@ -115,13 +125,13 @@ export const HeroContent = () => {
         variants={slideInFromRight(0.8) as any}
         className="relative w-full lg:w-[40%] flex justify-center items-center mt-20 lg:mt-0"
       >
-        <div className="relative circle-frame h-[320px] w-[320px] lg:h-[480px] lg:w-[480px] flex items-center justify-center p-6 bg-transparent">
-          <div className="relative overflow-hidden rounded-full h-full w-full border-4 border-white/5 shadow-2xl">
+        <div className="relative blob-frame h-[320px] w-[320px] lg:h-[480px] lg:w-[480px] flex items-center justify-center p-6 bg-transparent">
+          <div className="relative overflow-hidden blob-inner h-full w-full border-4 border-white/5 shadow-2xl">
             <Image
               src="/profile.jpg"
               alt="Yashith Prabhashwara"
               fill
-              className="object-cover select-none scale-100 hover:scale-105 transition-all duration-700 ease-in-out"
+              className="object-cover select-none scale-100 hover:scale-110 transition-all duration-700 ease-in-out"
               draggable={false}
               priority
             />

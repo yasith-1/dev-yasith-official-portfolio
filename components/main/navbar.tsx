@@ -1,6 +1,5 @@
 'use client';
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { LINKS, NAV_LINKS, SOCIALS } from "@/constants";
@@ -9,23 +8,24 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-10">
+    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-4 md:px-10">
       {/* Navbar Container */}
       <div className="w-full h-full flex items-center justify-between m-auto px-[10px]">
         {/* Logo + Name */}
         <Link
           href="#about-me"
-          className="flex items-center"
+          className="flex flex-row items-center"
         >
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={70}
-            height={70}
-            draggable={false}
-            className="cursor-pointer"
-          />
-          <div className="hidden md:flex md:selffont-bold ml-[10px] text-gray-300">Yashith Prabhashwara</div>
+          <div className="flex items-center justify-center p-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm group hover:border-purple-500/50 transition-all">
+            <span className="text-xl font-bold tracking-tighter text-white">
+              &lt;YP
+              <span className="text-purple-500 group-hover:text-cyan-400 transition-colors">/</span>
+              &gt;
+            </span>
+          </div>
+          <div className="hidden md:block font-bold ml-3 text-gray-300 hover:text-white transition-colors">
+            Yashith Prabhashwara
+          </div>
         </Link>
 
         {/* Web Navbar */}

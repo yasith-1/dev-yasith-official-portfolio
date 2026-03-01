@@ -32,6 +32,8 @@
   position: relative;
   width: -moz-max-content;
   width: max-content;
+  max-width: 100%;
+  box-sizing: border-box;
   transition: 0.45s cubic-bezier(0.6, 0.6, 0, 1) box-shadow;
 }
 
@@ -93,30 +95,51 @@ html {
   box-shadow: 0 0 40px rgba(156, 178, 255, 0.4);
 }
 
-.circle-frame {
-  position: relative;
-  border-radius: 50%;
-  padding: 10px;
-  background: linear-gradient(135deg, rgba(156, 178, 255, 0.3) 0%, rgba(186, 156, 255, 0.1) 100%);
-  box-shadow: 0 0 30px rgba(186, 156, 255, 0.2);
+.social-icon {
+  @apply w-12 h-12 rounded-xl flex items-center justify-center bg-white/5 hover:bg-purple-500/20 text-gray-400 hover:text-white transition-all duration-300 backdrop-blur-md border border-white/10 shadow-lg;
 }
 
-.circle-frame::before {
+.blob-frame {
+  position: relative;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(156, 178, 255, 0.3) 0%, rgba(186, 156, 255, 0.1) 100%);
+  box-shadow: 0 0 40px rgba(186, 156, 255, 0.2);
+  animation: blob-animation 8s ease-in-out infinite;
+}
+
+.blob-frame::before {
   content: '';
   position: absolute;
   top: -2px;
   left: -2px;
   right: -2px;
   bottom: -2px;
-  border-radius: 50%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   padding: 2px;
   background: linear-gradient(45deg, #9cb2ff, #ba9cff, #9cb2ff);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+  animation: blob-animation 8s ease-in-out infinite;
 }
 
-.social-icon {
-  @apply w-10 h-10 rounded-full flex items-center justify-center bg-gray-800/50 hover:bg-purple-500/20 transition-all duration-300 backdrop-blur-sm border border-white/10;
+.blob-inner {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: blob-animation 8s ease-in-out infinite;
+}
+
+@keyframes blob-animation {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+
+  50% {
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+  }
+
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
 }

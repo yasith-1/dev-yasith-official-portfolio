@@ -8,75 +8,6 @@ import {
   RxBlendingMode,
 } from "react-icons/rx";
 
-export const SKILL_DATA = [
-  {
-    skill_name: "HTML",
-    image: "html.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "CSS",
-    image: "css.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "JavaScript",
-    image: "js.png",
-    width: 65,
-    height: 65,
-  },
-  {
-    skill_name: "Tailwind CSS",
-    image: "tailwind.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "React",
-    image: "react.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Redux",
-    image: "redux.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "TypeScript",
-    image: "ts.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Next.js 14",
-    image: "next.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Node.js",
-    image: "node.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "MongoDB",
-    image: "mongodb.png",
-    width: 40,
-    height: 40,
-  },
-  {
-    skill_name: "Docker",
-    image: "docker.png",
-    width: 70,
-    height: 70,
-  },
-] as const;
-
 export const SOCIALS = [
   {
     name: "Linkedin",
@@ -147,12 +78,6 @@ export const FRONTEND_SKILL = [
 ] as const;
 
 export const BACKEND_SKILL = [
-  {
-    skill_name: "Java",
-    image: "java.png", // Placeholder
-    width: 80,
-    height: 80,
-  },
   {
     skill_name: "Node.js",
     image: "node.png",
@@ -328,22 +253,49 @@ export const JOURNEY = [
 
 export const CERTIFICATIONS = [
   {
-    title: "Kubernetes For Absolute Beginners",
+    title: "AWS Basics",
     issuer: "KodeKloud",
-    date: "2026",
-    image: "/skills/docker.png", // Using docker icon as placeholder for Kubernetes if not found
+    date: "February 22, 2026",
+    image: "/certifications/aws-basics.png",
+    description: "Strengthened understanding of Amazon Web Services fundamentals, including cloud concepts, core AWS services, and real-world use cases.",
+    instructor: "Sanjeev Thiyagarajan",
+    skills: ["AWS", "Cloud Computing", "DevOps"]
   },
   {
     title: "Docker For Absolute Beginners",
     issuer: "KodeKloud",
-    date: "2026",
-    image: "/skills/docker.png",
+    date: "February 21, 2026",
+    image: "/certifications/docker.png",
+    description: "Strengthened understanding of Docker, including containerization, images, and running applications efficiently in isolated environments.",
+    instructor: "Mumshad Mannambeth",
+    skills: ["Docker", "Containerization", "DevOps"]
   },
   {
-    title: "Git | GitHub 8 Days Workshop",
-    issuer: "Pro Code Lab",
-    date: "2025",
-    image: "/skills/html.png", // Placeholder
+    title: "Linux For Absolute Beginners",
+    issuer: "KodeKloud",
+    date: "February 20, 2026",
+    image: "/certifications/linux.png",
+    description: "Strengthened foundational Linux skills, covering essential commands, file management, and system navigation.",
+    instructor: "Jeremy Morgan",
+    skills: ["Linux", "System Admin", "Open Source"]
+  },
+  {
+    title: "Kubernetes For Absolute Beginners",
+    issuer: "KodeKloud",
+    date: "February 15, 2026",
+    image: "/certifications/kubernetes.png",
+    description: "Comprehensive introduction to Kubernetes, covering pods, services, deployments, and cluster management.",
+    instructor: "Mumshad Mannambeth",
+    skills: ["Kubernetes", "Orchestration", "Cloud Native"]
+  },
+  {
+    title: "8-day Git | GitHub Workshop",
+    issuer: "Pro Code Lab (PCL)",
+    date: "17 March 2025",
+    image: "/certifications/git.png",
+    description: "Deep dive into Git and GitHub, covering branching, merging, pull requests, and professional collaboration workflows.",
+    instructor: "PCL Instructors",
+    skills: ["Git", "GitHub", "Version Control"]
   },
 ] as const;
 
