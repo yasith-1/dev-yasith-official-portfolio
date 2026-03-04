@@ -25,9 +25,23 @@ const getLibrary = () => {
 
 const findBrowserPath = () => {
     // 1. Check if user provided a path
+    console.log(`📡 [WHATSAPP] Checking PUPPETEER_EXECUTABLE_PATH: ${process.env.PUPPETEER_EXECUTABLE_PATH || 'not set'}`);
     if (process.env.PUPPETEER_EXECUTABLE_PATH) {
-        console.log(`📡 [WHATSAPP] Using environment path: ${process.env.PUPPETEER_EXECUTABLE_PATH}`);
-        return process.env.PUPPETEER_EXECUTABLE_PATH;
+        const envPath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        if (fs.existsSync(envPath)) {
+            console.log(`📡 [WHATSAPP] Using environment path (absolute): ${envPath}`);
+            return envPath;
+        } else {
+            // Try to see if it's a command in PATH
+            try {
+                const resolvedPath = execSync(`which ${envPath} 2>/dev/null`).toString().trim();
+                if (resolvedPath && fs.existsSync(resolvedPath)) {
+                    console.log(`📡 [WHATSAPP] Using environment path (resolved via which): ${resolvedPath}`);
+                    return resolvedPath;
+                }
+            } catch (e) { }
+            console.warn(`⚠️ [WHATSAPP] Could not resolve PUPPETEER_EXECUTABLE_PATH: ${envPath}`);
+        }
     }
 
     // 2. Try standard "which" command for common names
@@ -48,8 +62,11 @@ const findBrowserPath = () => {
         '/usr/bin/chromium-browser',
         '/usr/bin/google-chrome-stable',
         '/usr/bin/google-chrome',
+        '/usr/bin/chrome',
+        '/usr/local/bin/chromium',
         '/nix/var/nix/profiles/default/bin/chromium',
-        '/nix/var/nix/profiles/default/bin/google-chrome'
+        '/nix/var/nix/profiles/default/bin/google-chrome',
+        '/nix/var/nix/profiles/per-user/root/channels/nixpkgs/bin/chromium'
     ];
 
     for (const f of fallbacks) {
@@ -72,7 +89,9 @@ const findBrowserPath = () => {
         console.log("📡 [WHATSAPP] Nix store scan failed/skipped");
     }
 
-    return undefined;
+    // 5. Final fallback to hope it's in PATH
+    console.log("📡 [WHATSAPP] Returning final fallback: chromium");
+    return 'chromium';
 };
 
 export const getWhatsAppClient = async () => {
