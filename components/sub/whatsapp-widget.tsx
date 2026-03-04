@@ -20,10 +20,14 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
 
     // Check if running on Vercel or Localhost
     useEffect(() => {
-        const isVercelEnv = window.location.hostname !== 'localhost' && !window.location.hostname.includes('127.0.0.1');
-        setIsVercel(isVercelEnv);
+        const hostname = window.location.hostname;
+        const isLocal = hostname === 'localhost' || hostname.includes('127.0.0.1');
+        const isRailway = hostname.includes('railway.app');
 
-        if (!isVercelEnv) {
+        // Only use redirect mode on Vercel or other serverless hosts
+        setIsVercel(!isLocal && !isRailway);
+
+        if (isLocal || isRailway) {
             checkStatus();
         } else {
             setBotStatus('online'); // Assume standard link is always ready on prod
@@ -177,8 +181,8 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
                 className={`flex h-16 w-16 items-center justify-center rounded-full shadow-[0_0_20px_rgba(112,66,248,0.4)] transition-all duration-300 ${isOpen
-                        ? "bg-red-500/20 border border-red-500/50 text-red-400 rotate-90"
-                        : "bg-gradient-to-br from-[#2A0E61] to-[#030014] border border-purple-500/30 text-white"
+                    ? "bg-red-500/20 border border-red-500/50 text-red-400 rotate-90"
+                    : "bg-gradient-to-br from-[#2A0E61] to-[#030014] border border-purple-500/30 text-white"
                     }`}
             >
                 {isOpen ? <FaTimes className="text-2xl" /> : <HiOutlineChatAlt2 className="text-3xl" />}
