@@ -140,7 +140,7 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                                     className="bg-green-500/10 border border-green-500/30 rounded-2xl rounded-br-none p-3 self-end max-w-[85%]"
                                 >
                                     <p className="text-xs text-green-400 flex items-center gap-2">
-                                        Message transmitted! ✔️
+                                        Message Sent! ✔️
                                     </p>
                                 </motion.div>
                             )}
