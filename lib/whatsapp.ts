@@ -39,11 +39,19 @@ export const getWhatsAppClient = async () => {
     if (!global.whatsappClient) {
         console.log("🚀 Initializing WhatsApp Galactic Bridge...");
 
+        // Detect the best browser path for Linux/Railway
+        let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        if (!executablePath && process.env.RAILWAY_ENVIRONMENT) {
+            const commonPaths = ['/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome-stable', 'chromium'];
+            // We'll let Puppeteer try 'chromium' as a first guess if none are specified
+            executablePath = 'chromium';
+        }
+
         global.whatsappClient = new Client({
             authStrategy: new LocalAuth(),
             puppeteer: {
                 handleSIGINT: false,
-                executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || (process.env.RAILWAY_ENVIRONMENT ? 'chromium' : undefined),
+                executablePath: executablePath || undefined,
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
