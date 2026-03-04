@@ -1,4 +1,5 @@
 // lib/whatsapp.ts
+import fs from 'fs';
 
 // Extend the global object to store the client across HMR reloads
 declare global {
@@ -7,11 +8,6 @@ declare global {
     var whatsappQR: string | undefined;
 }
 
-/**
- * We use eval('require') here because it prevents Turbopack/Webpack from 
- * statically analyzing and bundling the heavy whatsapp-web.js library,
- * which is what causes the compilation panic.
- */
 const getLibrary = () => {
     try {
         const req = eval('require');
@@ -24,6 +20,36 @@ const getLibrary = () => {
         console.error("WhatsApp Link Error: Ensure 'whatsapp-web.js' and 'qrcode-terminal' are installed.");
         return null;
     }
+};
+
+const findBrowserPath = () => {
+    // If user provided a path, use it
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH;
+
+    // Common paths for Chrome/Chromium on Linux (Railway)
+    const paths = [
+        '/usr/bin/google-chrome-stable',
+        '/usr/bin/google-chrome',
+        '/usr/bin/chromium',
+        '/usr/bin/chromium-browser',
+        '/nix/var/nix/profiles/default/bin/google-chrome-stable',
+        '/nix/var/nix/profiles/default/bin/chromium'
+    ];
+
+    for (const path of paths) {
+        if (fs.existsSync(path)) {
+            console.log(`🔍 [WHATSAPP] Found browser at: ${path}`);
+            return path;
+        }
+    }
+
+    // Last resort: try 'google-chrome-stable' command directly
+    if (process.env.RAILWAY_ENVIRONMENT) {
+        console.log("🔍 [WHATSAPP] No fixed path found, defaulting to 'google-chrome-stable' command");
+        return 'google-chrome-stable';
+    }
+
+    return undefined;
 };
 
 export const getWhatsAppClient = async () => {
@@ -39,17 +65,13 @@ export const getWhatsAppClient = async () => {
     if (!global.whatsappClient) {
         console.log("🚀 Initializing WhatsApp Galactic Bridge...");
 
-        // Detect the best browser path for Linux/Railway
-        let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-        if (!executablePath && process.env.RAILWAY_ENVIRONMENT) {
-            executablePath = 'chromium'; // Default Nixpacks path
-        }
+        const executablePath = findBrowserPath();
 
         global.whatsappClient = new Client({
             authStrategy: new LocalAuth(),
             puppeteer: {
                 handleSIGINT: false,
-                executablePath: executablePath || undefined,
+                executablePath: executablePath,
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
@@ -87,8 +109,8 @@ export const getWhatsAppClient = async () => {
 
         try {
             await global.whatsappClient.initialize();
-        } catch (err) {
-            console.error("❌ [WHATSAPP] Failed to initialize bridge", err);
+        } catch (err: any) {
+            console.error("❌ [WHATSAPP] Failed to initialize bridge:", err.message);
         }
     }
 
