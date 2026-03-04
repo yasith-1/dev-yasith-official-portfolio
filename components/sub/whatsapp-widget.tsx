@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaWhatsapp, FaPaperPlane, FaTimes, FaCircle } from "react-icons/fa";
+import { FaWhatsapp, FaPaperPlane, FaTimes } from "react-icons/fa";
 import { HiOutlineChatAlt2 } from "react-icons/hi";
 
 interface WhatsAppWidgetProps {
@@ -16,8 +16,20 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
     const [isSent, setIsSent] = useState(false);
     const [botStatus, setBotStatus] = useState<'loading' | 'online' | 'offline'>('loading');
     const [error, setError] = useState<string | null>(null);
+    const [isVercel, setIsVercel] = useState(false);
 
-    // Check bot status on mount and when opened
+    // Check if running on Vercel or Localhost
+    useEffect(() => {
+        const isVercelEnv = window.location.hostname !== 'localhost' && !window.location.hostname.includes('127.0.0.1');
+        setIsVercel(isVercelEnv);
+
+        if (!isVercelEnv) {
+            checkStatus();
+        } else {
+            setBotStatus('online'); // Assume standard link is always ready on prod
+        }
+    }, []);
+
     const checkStatus = async () => {
         try {
             const response = await fetch("/api/whatsapp/auth");
@@ -32,19 +44,21 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
         }
     };
 
-    useEffect(() => {
-        checkStatus();
-        // Poll status every 30 seconds if open
-        const interval = setInterval(() => {
-            if (isOpen) checkStatus();
-        }, 30000);
-        return () => clearInterval(interval);
-    }, [isOpen]);
-
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!message.trim()) return;
 
+        // IF WE ARE ON VERCEL: Use direct link to avoid Serverless timeout issues
+        if (isVercel) {
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+            setIsSent(true);
+            setMessage("");
+            setTimeout(() => setIsSent(false), 3000);
+            return;
+        }
+
+        // IF WE ARE LOCAL: Use the high-end bot "No Redirect" transmission
         setError(null);
         try {
             const response = await fetch("/api/whatsapp/send", {
@@ -60,11 +74,7 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                 setMessage("");
                 setTimeout(() => setIsSent(false), 5000);
             } else {
-                // Instead of opening a new tab, show the error in the UI
                 setError(data.error || "Failed to transmit message.");
-
-                // Only if the user EXPLICITLY wants to use the old way, they can click a link
-                // But per request, we avoid automatic new tabs.
             }
         } catch (err) {
             setError("Network error. Could not reach the Hub.");
@@ -88,17 +98,15 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                                     <div className="h-10 w-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50">
                                         <FaWhatsapp className={`text-2xl drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] ${botStatus === 'online' ? 'text-green-400' : 'text-gray-500'}`} />
                                     </div>
-                                    <span className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-[#030014] ${botStatus === 'online' ? 'bg-green-500 animate-pulse' :
-                                            botStatus === 'loading' ? 'bg-yellow-500 animate-pulse' : 'bg-red-500'
+                                    <span className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-[#030014] ${botStatus === 'online' ? 'bg-green-500 animate-pulse' : 'bg-red-500'
                                         }`}></span>
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-bold text-white tracking-wide">
                                         {assistantName} <span className="text-gray-400 font-normal">| Space Hub</span>
                                     </h3>
-                                    <p className={`text-[10px] font-medium uppercase tracking-widest ${botStatus === 'online' ? 'text-green-400/80' : 'text-red-400/80'
-                                        }`}>
-                                        {botStatus === 'online' ? 'Direct Link Active' : 'Link Offline'}
+                                    <p className="text-[10px] text-green-400/80 font-medium uppercase tracking-widest">
+                                        {isVercel ? 'Cloud Priority Link' : 'Local Galactic Bridge'}
                                     </p>
                                 </div>
                             </div>
@@ -112,17 +120,11 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
 
                         {/* Chat Body */}
                         <div className="p-5 min-h-[150px] flex flex-col justify-end gap-4 overflow-y-auto max-h-[400px]">
-                            {botStatus === 'offline' && (
-                                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 mb-2">
-                                    <p className="text-[11px] text-red-400">
-                                        ⚠️ The transmission bridge is offline. If you are the owner, please link your device at <code className="bg-black/40 px-1 rounded">/api/whatsapp/auth</code>.
-                                    </p>
-                                </div>
-                            )}
-
                             <div className="bg-white/5 border border-white/10 rounded-2xl rounded-bl-none p-3 self-start max-w-[85%]">
                                 <p className="text-sm text-gray-200">
-                                    Greetings! 🚀 Send a message and it will be delivered directly to my device. No browser redirects!
+                                    {isVercel
+                                        ? "Greetings from the Hub! 🚀 Send a message and I'll receive it instantly via WhatsApp."
+                                        : "Greetings! 🚀 Message me directly from here. No browser redirects while the bridge is active."}
                                 </p>
                                 <span className="text-[9px] text-gray-500 mt-1 block">Space Assistant • Just now</span>
                             </div>
@@ -134,21 +136,15 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                                     className="bg-green-500/10 border border-green-500/30 rounded-2xl rounded-br-none p-3 self-end max-w-[85%]"
                                 >
                                     <p className="text-xs text-green-400 flex items-center gap-2">
-                                        <FaPaperPlane className="text-[10px]" /> Message transmitted successfully!
+                                        Message transmitted! ✔️
                                     </p>
                                 </motion.div>
                             )}
 
                             {error && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="bg-red-500/10 border border-red-500/30 rounded-2xl p-3 self-center w-full"
-                                >
-                                    <p className="text-xs text-red-400 text-center">
-                                        {error}
-                                    </p>
-                                </motion.div>
+                                <p className="text-[10px] text-red-500 text-center bg-red-500/10 p-2 rounded-lg">
+                                    {error}
+                                </p>
                             )}
                         </div>
 
@@ -159,23 +155,17 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                                     type="text"
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
-                                    placeholder={botStatus === 'online' ? "Type your transmission..." : "Bridge offline..."}
-                                    disabled={botStatus !== 'online'}
-                                    className="w-full rounded-full bg-[#030014] border border-white/10 py-2.5 pl-4 pr-12 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-all shadow-inner disabled:opacity-50"
+                                    placeholder="Type your transmission..."
+                                    className="w-full rounded-full bg-[#030014] border border-white/10 py-2.5 pl-4 pr-12 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-all shadow-inner"
                                 />
                                 <button
                                     type="submit"
-                                    disabled={!message.trim() || botStatus !== 'online'}
-                                    className="absolute right-1 p-2 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full text-white hover:scale-110 active:scale-95 transition-all disabled:opacity-50 disabled:grayscale disabled:scale-100"
+                                    disabled={!message.trim()}
+                                    className="absolute right-1 p-2 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full text-white hover:scale-110 active:scale-95 transition-all disabled:opacity-50 disabled:grayscale"
                                 >
                                     <FaPaperPlane className="text-xs" />
                                 </button>
                             </div>
-                            {botStatus !== 'online' && (
-                                <p className="text-[9px] text-gray-500 mt-2 text-center">
-                                    Link your WhatsApp at <span className="underline">/api/whatsapp/auth</span> to enable sending.
-                                </p>
-                            )}
                         </form>
                     </motion.div>
                 )}
@@ -191,19 +181,7 @@ const WhatsAppWidget = ({ phoneNumber, assistantName = "Yashith" }: WhatsAppWidg
                         : "bg-gradient-to-br from-[#2A0E61] to-[#030014] border border-purple-500/30 text-white"
                     }`}
             >
-                {isOpen ? (
-                    <FaTimes className="text-2xl" />
-                ) : (
-                    <div className="relative">
-                        <HiOutlineChatAlt2 className="text-3xl" />
-                        {botStatus === 'online' && (
-                            <span className="absolute -top-1 -right-1 flex h-4 w-4">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border border-[#030014] text-[8px] items-center justify-center font-bold text-white">1</span>
-                            </span>
-                        )}
-                    </div>
-                )}
+                {isOpen ? <FaTimes className="text-2xl" /> : <HiOutlineChatAlt2 className="text-3xl" />}
             </motion.button>
         </div>
     );
