@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["google-chrome", "glib", "nss", "nspr", "atk", "cups", "pango", "cairo", "alsa-lib", "libX11", "gcc"]
+nixPkgs = ["chromium", "glib", "nss", "nspr", "atk", "cups", "pango", "cairo", "alsa-lib", "libX11", "dbus", "libxcb", "gcc"]
 
 [phases.build]
 cmds = ["npm run build"]
@@ -9,4 +9,3 @@ cmds = ["npm run start"]
 
 [variables]
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-# We leave EXECUTABLE_PATH empty here and let the code find it dynamically

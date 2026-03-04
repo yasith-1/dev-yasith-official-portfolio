@@ -1,5 +1,6 @@
 // lib/whatsapp.ts
 import fs from 'fs';
+import { execSync } from 'child_process';
 
 // Extend the global object to store the client across HMR reloads
 declare global {
@@ -23,30 +24,34 @@ const getLibrary = () => {
 };
 
 const findBrowserPath = () => {
-    // If user provided a path, use it
+    // If user provided a path in environment, priority 1
     if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH;
 
-    // Common paths for Chrome/Chromium on Linux (Railway)
+    // Check system via "which" command (Priority 2)
+    try {
+        const path = execSync('which chromium || which google-chrome-stable || which google-chrome').toString().trim();
+        if (path) {
+            console.log(`📡 [WHATSAPP] System found browser at: ${path}`);
+            return path;
+        }
+    } catch (e) {
+        // "which" failed, continue to manual check
+    }
+
+    // Common paths for Chrome/Chromium (Priority 3)
     const paths = [
+        '/usr/bin/chromium',
         '/usr/bin/google-chrome-stable',
         '/usr/bin/google-chrome',
-        '/usr/bin/chromium',
-        '/usr/bin/chromium-browser',
-        '/nix/var/nix/profiles/default/bin/google-chrome-stable',
-        '/nix/var/nix/profiles/default/bin/chromium'
+        '/nix/var/nix/profiles/default/bin/chromium',
+        '/nix/var/nix/profiles/default/bin/google-chrome-stable'
     ];
 
     for (const path of paths) {
         if (fs.existsSync(path)) {
-            console.log(`🔍 [WHATSAPP] Found browser at: ${path}`);
+            console.log(`📡 [WHATSAPP] Manual scan found browser at: ${path}`);
             return path;
         }
-    }
-
-    // Last resort: try 'google-chrome-stable' command directly
-    if (process.env.RAILWAY_ENVIRONMENT) {
-        console.log("🔍 [WHATSAPP] No fixed path found, defaulting to 'google-chrome-stable' command");
-        return 'google-chrome-stable';
     }
 
     return undefined;
@@ -66,6 +71,9 @@ export const getWhatsAppClient = async () => {
         console.log("🚀 Initializing WhatsApp Galactic Bridge...");
 
         const executablePath = findBrowserPath();
+        if (!executablePath) {
+            console.error("❌ [WHATSAPP] CRITICAL: No browser browser found. Bot cannot start.");
+        }
 
         global.whatsappClient = new Client({
             authStrategy: new LocalAuth(),
@@ -110,7 +118,7 @@ export const getWhatsAppClient = async () => {
         try {
             await global.whatsappClient.initialize();
         } catch (err: any) {
-            console.error("❌ [WHATSAPP] Failed to initialize bridge:", err.message);
+            console.error("❌ [WHATSAPP] Initialization Error:", err.message);
         }
     }
 
