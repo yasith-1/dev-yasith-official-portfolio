@@ -32,10 +32,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <StarsCanvas />
         <Navbar />
         {children}
-        <WhatsAppWidget
+        {/* <WhatsAppWidget
           phoneNumber={WHATSAPP_CONFIG.phoneNumber}
           assistantName={WHATSAPP_CONFIG.assistantName}
-        />
+        /> */}
         <Footer />
       </body>
     </html>
