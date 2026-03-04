@@ -25,7 +25,11 @@ nixPkgs = [
     "dbus",
     "libxcb",
     "gtk3",
-    "gcc"
+    "gcc",
+    "libdrm",
+    "libxshmfence",
+    "mesa",
+    "expat"
 ]
 
 [phases.build]
@@ -36,4 +40,5 @@ cmds = ["npm run start"]
 
 [variables]
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
 # We will find the path in the code

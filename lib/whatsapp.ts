@@ -25,32 +25,51 @@ const getLibrary = () => {
 
 const findBrowserPath = () => {
     // 1. Check if user provided a path
-    if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH;
-
-    // 2. Try to find it in the Nix store (Most likely for Railway)
-    try {
-        const nixPath = execSync('find /nix/store -name chromium -type f -executable | head -n 1').toString().trim();
-        if (nixPath) {
-            console.log(`📡 [WHATSAPP] Found Nix binary at: ${nixPath}`);
-            return nixPath;
-        }
-    } catch (e) {
-        console.log("📡 [WHATSAPP] Nix store scan skipped/failed");
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+        console.log(`📡 [WHATSAPP] Using environment path: ${process.env.PUPPETEER_EXECUTABLE_PATH}`);
+        return process.env.PUPPETEER_EXECUTABLE_PATH;
     }
 
-    // 3. Try standard "which" command
-    try {
-        const path = execSync('which chromium || which google-chrome-stable').toString().trim();
-        if (path) {
-            console.log(`📡 [WHATSAPP] "which" found browser at: ${path}`);
-            return path;
-        }
-    } catch (e) { }
+    // 2. Try standard "which" command for common names
+    const commonNames = ['chromium', 'chromium-browser', 'google-chrome-stable', 'google-chrome', 'chrome'];
+    for (const name of commonNames) {
+        try {
+            const path = execSync(`which ${name} 2>/dev/null`).toString().trim();
+            if (path && fs.existsSync(path)) {
+                console.log(`📡 [WHATSAPP] Found via which (${name}): ${path}`);
+                return path;
+            }
+        } catch (e) { }
+    }
 
-    // 4. Manual Fallbacks
-    const fallbacks = ['/usr/bin/chromium', '/usr/bin/google-chrome-stable', '/usr/bin/google-chrome'];
+    // 3. Try Nix-specific and common Linux paths
+    const fallbacks = [
+        '/usr/bin/chromium',
+        '/usr/bin/chromium-browser',
+        '/usr/bin/google-chrome-stable',
+        '/usr/bin/google-chrome',
+        '/nix/var/nix/profiles/default/bin/chromium',
+        '/nix/var/nix/profiles/default/bin/google-chrome'
+    ];
+
     for (const f of fallbacks) {
-        if (fs.existsSync(f)) return f;
+        if (fs.existsSync(f)) {
+            console.log(`📡 [WHATSAPP] Found via fallback path: ${f}`);
+            return f;
+        }
+    }
+
+    // 4. More aggressive Nix store search
+    try {
+        if (fs.existsSync('/nix/store')) {
+            const nixPath = execSync('find /nix/store -maxdepth 4 -name chromium -type f -executable 2>/dev/null | head -n 1').toString().trim();
+            if (nixPath) {
+                console.log(`📡 [WHATSAPP] Found via Nix store scan: ${nixPath}`);
+                return nixPath;
+            }
+        }
+    } catch (e) {
+        console.log("📡 [WHATSAPP] Nix store scan failed/skipped");
     }
 
     return undefined;
@@ -118,9 +137,13 @@ export const getWhatsAppClient = async () => {
         });
 
         try {
+            console.log("🚦 Starting WhatsApp client initialization...");
             await global.whatsappClient.initialize();
         } catch (err: any) {
-            console.error("❌ [WHATSAPP] Critical Error:", err.message);
+            console.error("❌ [WHATSAPP] Critical Error during initialization:", err);
+            if (err.message && err.message.includes('launch')) {
+                console.error("💡 TIP: This usually means a browser dependency is missing or the path is incorrect.");
+            }
         }
     }
 
