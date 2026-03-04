@@ -1,5 +1,32 @@
 [phases.setup]
-nixPkgs = ["chromium", "glib", "nss", "nspr", "atk", "cups", "pango", "cairo", "alsa-lib", "libX11", "dbus", "libxcb", "gcc"]
+nixPkgs = [
+    "chromium",
+    "glib",
+    "nss",
+    "nspr",
+    "atk",
+    "at-spi2-atk",
+    "at-spi2-core",
+    "cups",
+    "pango",
+    "cairo",
+    "libX11",
+    "libXcomposite",
+    "libXcursor",
+    "libXdamage",
+    "libXext",
+    "libXfixes",
+    "libXi",
+    "libXrender",
+    "libXtst",
+    "libXrandr",
+    "libXScrnSaver",
+    "alsa-lib",
+    "dbus",
+    "libxcb",
+    "gtk3",
+    "gcc"
+]
 
 [phases.build]
 cmds = ["npm run build"]
@@ -9,3 +36,4 @@ cmds = ["npm run start"]
 
 [variables]
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
+# We will find the path in the code

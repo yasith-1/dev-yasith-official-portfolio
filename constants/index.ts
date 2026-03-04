@@ -1,4 +1,5 @@
-import { FaYoutube, FaFacebook, FaMedium } from "react-icons/fa";
+import { FaYoutube, FaFacebook, FaMedium, FaWhatsapp } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 import {
   RxDiscordLogo,
   RxGithubLogo,
@@ -6,6 +7,7 @@ import {
   RxTwitterLogo,
   RxLinkedinLogo,
   RxBlendingMode,
+  RxDotFilled
 } from "react-icons/rx";
 
 export const SOCIALS = [
@@ -196,24 +198,34 @@ export const FOOTER_DATA = [
         link: "https://www.linkedin.com/in/yashith-prabhashwara/",
       },
       {
-        name: "GitHub",
-        icon: RxGithubLogo,
-        link: "https://github.com/yasith-1",
-      },
-      {
         name: "Medium",
         icon: FaMedium,
         link: "https://medium.com/@yasithofficialart",
       },
+      {
+        name: "WhatsApp",
+        icon: FaWhatsapp,
+        link: "https://wa.me/94701410113",
+      },
     ],
   },
   {
-    title: "About",
+    title: "Quick Links",
     data: [
       {
         name: "Contact Me",
-        icon: null,
+        icon: HiOutlineMail,
         link: "mailto:yashith.wd@gmail.com",
+      },
+      {
+        name: "Projects",
+        icon: RxBlendingMode,
+        link: "#projects",
+      },
+      {
+        name: "Certifications",
+        icon: RxDotFilled,
+        link: "#certifications",
       },
     ],
   },

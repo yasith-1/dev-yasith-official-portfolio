@@ -24,34 +24,33 @@ const getLibrary = () => {
 };
 
 const findBrowserPath = () => {
-    // If user provided a path in environment, priority 1
+    // 1. Check if user provided a path
     if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH;
 
-    // Check system via "which" command (Priority 2)
+    // 2. Try to find it in the Nix store (Most likely for Railway)
     try {
-        const path = execSync('which chromium || which google-chrome-stable || which google-chrome').toString().trim();
-        if (path) {
-            console.log(`📡 [WHATSAPP] System found browser at: ${path}`);
-            return path;
+        const nixPath = execSync('find /nix/store -name chromium -type f -executable | head -n 1').toString().trim();
+        if (nixPath) {
+            console.log(`📡 [WHATSAPP] Found Nix binary at: ${nixPath}`);
+            return nixPath;
         }
     } catch (e) {
-        // "which" failed, continue to manual check
+        console.log("📡 [WHATSAPP] Nix store scan skipped/failed");
     }
 
-    // Common paths for Chrome/Chromium (Priority 3)
-    const paths = [
-        '/usr/bin/chromium',
-        '/usr/bin/google-chrome-stable',
-        '/usr/bin/google-chrome',
-        '/nix/var/nix/profiles/default/bin/chromium',
-        '/nix/var/nix/profiles/default/bin/google-chrome-stable'
-    ];
-
-    for (const path of paths) {
-        if (fs.existsSync(path)) {
-            console.log(`📡 [WHATSAPP] Manual scan found browser at: ${path}`);
+    // 3. Try standard "which" command
+    try {
+        const path = execSync('which chromium || which google-chrome-stable').toString().trim();
+        if (path) {
+            console.log(`📡 [WHATSAPP] "which" found browser at: ${path}`);
             return path;
         }
+    } catch (e) { }
+
+    // 4. Manual Fallbacks
+    const fallbacks = ['/usr/bin/chromium', '/usr/bin/google-chrome-stable', '/usr/bin/google-chrome'];
+    for (const f of fallbacks) {
+        if (fs.existsSync(f)) return f;
     }
 
     return undefined;
@@ -71,8 +70,11 @@ export const getWhatsAppClient = async () => {
         console.log("🚀 Initializing WhatsApp Galactic Bridge...");
 
         const executablePath = findBrowserPath();
+
         if (!executablePath) {
-            console.error("❌ [WHATSAPP] CRITICAL: No browser browser found. Bot cannot start.");
+            console.warn("⚠️ [WHATSAPP] No browser path resolved. Attempting default launch...");
+        } else {
+            console.log(`✅ [WHATSAPP] Launching with: ${executablePath}`);
         }
 
         global.whatsappClient = new Client({
@@ -118,7 +120,7 @@ export const getWhatsAppClient = async () => {
         try {
             await global.whatsappClient.initialize();
         } catch (err: any) {
-            console.error("❌ [WHATSAPP] Initialization Error:", err.message);
+            console.error("❌ [WHATSAPP] Critical Error:", err.message);
         }
     }
 
