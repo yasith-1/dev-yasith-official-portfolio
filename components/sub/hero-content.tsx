@@ -76,13 +76,13 @@ export const HeroContent = () => {
         </motion.p>
 
         {/* Seeking Box */}
-        <motion.div
+        {/* <motion.div
           variants={slideInFromLeft(0.9) as any}
           className="text-gray-400 text-sm lg:text-base bg-white/5 p-4 rounded-2xl border border-white/5 max-w-[550px] shadow-inner font-sans"
         >
           Seeking <span className="text-white font-semibold underline decoration-cyan-500/50 underline-offset-4">career growth</span> or
           <span className="text-white font-semibold underline decoration-purple-500/50 underline-offset-4"> internship</span> opportunities to contribute to a collaborative engineering team and deliver robust software solutions.
-        </motion.div>
+        </motion.div> */}
 
         {/* Action Buttons */}
         <motion.div

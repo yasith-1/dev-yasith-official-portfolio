@@ -356,3 +356,8 @@ export const TESTIMONIALS = [
     image: "/testimonials/gihan.png",
   }
 ] as const;
+
+export const WHATSAPP_CONFIG = {
+  phoneNumber: "94701410113",
+  assistantName: "Yashith",
+};

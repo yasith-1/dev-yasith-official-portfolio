@@ -7,6 +7,8 @@ import { Navbar } from "@/components/main/navbar";
 import { StarsCanvas } from "@/components/main/star-background";
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
+import WhatsAppWidget from "@/components/sub/whatsapp-widget";
+import { WHATSAPP_CONFIG } from "@/constants";
 
 import "./globals.css";
 
@@ -30,6 +32,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <StarsCanvas />
         <Navbar />
         {children}
+        <WhatsAppWidget
+          phoneNumber={WHATSAPP_CONFIG.phoneNumber}
+          assistantName={WHATSAPP_CONFIG.assistantName}
+        />
         <Footer />
       </body>
     </html>
