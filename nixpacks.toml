@@ -39,12 +39,13 @@ nixPkgs = [
 ]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = ["which chromium || echo 'Chromium not found during build'", "npm run build"]
 
 [phases.start]
 cmds = ["npm run start"]
 
 [variables]
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-PUPPETEER_EXECUTABLE_PATH = "chromium"
-# We will find the path in the code
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
+NIXPACKS_ALLOW_UNFREE = "1"
+# We will also try to find the path dynamically in the code

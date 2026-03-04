@@ -11,7 +11,7 @@ export const Footer = () => {
       {/* Background Decorative Element */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50" />
 
-      <div className="max-w-[1240px] px-10 mx-auto flex flex-col items-center">
+      <div className="w-full px-6 lg:px-20 mx-auto flex flex-col items-center">
         {/* Let's Connect Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -25,6 +25,7 @@ const getLibrary = () => {
 
 const findBrowserPath = () => {
     // 1. Check if user provided a path
+    console.log(`📡 [WHATSAPP] Current Path: ${process.env.PATH}`);
     console.log(`📡 [WHATSAPP] Checking PUPPETEER_EXECUTABLE_PATH: ${process.env.PUPPETEER_EXECUTABLE_PATH || 'not set'}`);
     if (process.env.PUPPETEER_EXECUTABLE_PATH) {
         const envPath = process.env.PUPPETEER_EXECUTABLE_PATH;
@@ -90,7 +91,14 @@ const findBrowserPath = () => {
     }
 
     // 5. Final fallback to hope it's in PATH
-    console.log("📡 [WHATSAPP] Returning final fallback: chromium");
+    // If we've reached here, we haven't found a verified absolute path.
+    // Try to trust the environment variable even if fs.existsSync failed (might be a permission issue)
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+        console.log(`📡 [WHATSAPP] Returning environment variable as last resort: ${process.env.PUPPETEER_EXECUTABLE_PATH}`);
+        return process.env.PUPPETEER_EXECUTABLE_PATH;
+    }
+
+    console.log("📡 [WHATSAPP] Returning final fallback name: chromium");
     return 'chromium';
 };
 
