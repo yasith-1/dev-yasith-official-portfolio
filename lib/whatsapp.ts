@@ -42,9 +42,7 @@ export const getWhatsAppClient = async () => {
         // Detect the best browser path for Linux/Railway
         let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
         if (!executablePath && process.env.RAILWAY_ENVIRONMENT) {
-            const commonPaths = ['/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome-stable', 'chromium'];
-            // We'll let Puppeteer try 'chromium' as a first guess if none are specified
-            executablePath = 'chromium';
+            executablePath = 'chromium'; // Default Nixpacks path
         }
 
         global.whatsappClient = new Client({
