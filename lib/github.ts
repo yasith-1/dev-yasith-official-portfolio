@@ -1,4 +1,7 @@
+"use server";
+
 import { GITHUB_USERNAME } from "@/constants";
+
 
 export interface GithubRepo {
     id: number;
@@ -49,3 +52,43 @@ export async function getGithubProjects() {
         return [];
     }
 }
+
+/**
+ * Fetches the social preview image for a GitHub repository.
+ * Returns the URL only if it's a custom-set social preview image.
+ * Otherwise returns null to signal fallback to local images.
+ */
+export async function getCustomSocialPreview(repoUrl: string): Promise<string | null> {
+    try {
+        // We use a server-side fetch to get the HTML and find the og:image tag
+        // Using a shorter revalidation time (5 minutes) to ensure latest images are picked up
+        const response = await fetch(repoUrl, { 
+            next: { revalidate: 300 },
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 PortfolioBot'
+            }
+        });
+
+        
+        if (!response.ok) return null;
+        
+        const html = await response.text();
+        const ogImageMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
+        
+        if (ogImageMatch && ogImageMatch[1]) {
+            const ogImageUrl = ogImageMatch[1];
+            
+            // GitHub serves custom social previews from repository-images.githubusercontent.com
+            // Generated previews are typically from opengraph.githubassets.com
+            if (ogImageUrl.includes("repository-images.githubusercontent.com")) {
+                return ogImageUrl;
+            }
+        }
+        
+        return null;
+    } catch (error) {
+        console.error("Error fetching social preview:", error);
+        return null;
+    }
+}
+
