@@ -160,13 +160,6 @@ export const PROJECTS: Project[] = [
     link: "https://github.com/yasith-1",
   },
   {
-    title: "Dev Docrizor",
-    description:
-      "Project resource management system for organizing development assets such as diagrams, design files, database scripts, and tracking project tasks efficiently using React, Express, and MongoDB.",
-    image: "/projects/project-2.png",
-    link: "https://github.com/yasith-1",
-  },
-  {
     title: "Library Management System",
     description:
       "Desktop application managing books, customers, and fines with report generation using Java, JavaFX, Jasper Report, and MySQL.",
