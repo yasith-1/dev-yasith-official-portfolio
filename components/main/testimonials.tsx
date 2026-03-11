@@ -19,10 +19,10 @@ export const Testimonials = () => {
                 transition={{ duration: 0.5 }}
                 className="flex flex-col items-center mb-16 px-4 text-center"
             >
-                <h1 className="text-[40px] md:text-[50px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 pb-4">
-                    Professional Recommendations
+                <h1 className="text-4xl md:text-7xl font-black text-white text-center px-4">
+                    Professionals <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">Recommendation</span>
                 </h1>
-                <p className="text-gray-400 text-lg max-w-[600px]">
+                <p className="text-gray-400 text-lg max-w-[600px] mt-6">
                     Honored to have collaborated with exceptional leaders and mentors who have shared their experiences working with me.
                 </p>
             </motion.div>

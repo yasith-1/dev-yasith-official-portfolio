@@ -30,9 +30,9 @@ export const Certifications = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="text-4xl md:text-5xl font-bold text-white text-center"
+                    className="text-4xl md:text-7xl font-black text-white text-center px-4"
                 >
-                    Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">Certifications</span>
+                    My <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">Certifications</span>
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0 }}

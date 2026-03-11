@@ -27,7 +27,7 @@ export const ProjectCard = ({
         href={link}
         target="_blank"
         rel="noreferrer noopener"
-        className="flex flex-col h-full overflow-hidden rounded-2xl border border-[#2A0E61] bg-[#03001417] backdrop-blur-md transition-all duration-300 group-hover:border-purple-500/50 group-hover:shadow-[0_0_30px_rgba(120,40,180,0.3)]"
+        className="flex flex-col h-full overflow-hidden rounded-[24px] border border-white/5 bg-[#030014]/40 backdrop-blur-2xl transition-all duration-500 group-hover:border-purple-500/50 group-hover:shadow-[0_0_50px_rgba(112,66,248,0.2)]"
       >
         <div className="relative aspect-video w-full overflow-hidden">
           <Image

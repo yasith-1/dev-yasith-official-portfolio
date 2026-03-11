@@ -13,8 +13,7 @@ import dynamic from "next/dynamic";
 import "./globals.css";
 
 const StarsCanvas = dynamic(
-  () => import("@/components/main/star-background").then((mod) => mod.StarsCanvas),
-  { ssr: false }
+  () => import("@/components/main/star-background").then((mod) => mod.StarsCanvas)
 );
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,10 +26,10 @@ export const metadata: Metadata = siteConfig;
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-[#030014] overflow-x-hidden">
       <body
         className={cn(
-          "bg-[#030014] overflow-y-scroll overflow-x-hidden",
+          "bg-transparent overflow-x-hidden antialiased",
           inter.className
         )}
       >

@@ -11,13 +11,9 @@ export const Encryption = () => {
       <div className="absolute w-auto h-auto top-0 z-[5] px-4">
         <motion.div
           variants={slideInFromTop(0.5)}
-          className="text-3xl md:text-[40px] font-medium text-center text-gray-200 mt-20"
+          className="text-4xl md:text-6xl font-black text-center text-white mt-10 md:mt-20 px-4"
         >
-          Performance{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-            &
-          </span>{" "}
-          security.
+          Securing the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">Digital Frontier</span>
         </motion.div>
       </div>
 

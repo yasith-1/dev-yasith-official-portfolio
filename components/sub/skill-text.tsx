@@ -18,22 +18,24 @@ export const SkillText = () => {
       >
         <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
         <h1 className="Welcome-text text-[13px]">
-          Think better with Next.js 14
+          Professional Tech Stack
         </h1>
       </motion.div>
 
-      <motion.div
-        variants={slideInFromLeft(0.5)}
-        className="text-[24px] sm:text-[30px] px-4 text-white font-medium mt-[10px] text-center mb-[15px]"
+      <motion.h1
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="text-4xl md:text-7xl font-black text-white text-center mt-6 px-4"
       >
-        Making apps with modern technologies.
-      </motion.div>
+        My <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">Skills</span>
+      </motion.h1>
 
       <motion.div
-        variants={slideInFromRight(0.5)}
-        className="cursive text-[18px] sm:text-[20px] text-gray-200 mb-10 mt-[10px] text-center px-4"
+        variants={slideInFromLeft(0.5)}
+        className="text-[18px] sm:text-[24px] px-4 text-white font-medium mt-[10px] text-center mb-[10px] opacity-70"
       >
-        Never miss a task, deadline or idea.
+        Making apps with modern technologies.
       </motion.div>
     </div>
   );

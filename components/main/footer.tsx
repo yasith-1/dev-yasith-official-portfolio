@@ -19,8 +19,8 @@ export const Footer = () => {
           transition={{ duration: 0.8 }}
           className="w-full flex flex-col items-center mb-16 space-y-4 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">
-            Let&apos;s build something amazing together
+          <h2 className="text-4xl md:text-6xl font-black text-white">
+            Let&apos;s build <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">something amazing</span> together
           </h2>
           <p className="text-gray-400 text-lg max-w-xl">
             Passionate about building seamless digital experiences. Reach out and let&apos;s make your ideas happen.
@@ -39,7 +39,7 @@ export const Footer = () => {
         </motion.div>
 
         {/* Footer Links Grid */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-10 border-t border-white/10 pt-16 pb-10">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 border-t border-white/10 pt-16 pb-10">
           {FOOTER_DATA.map((column, idx) => (
             <motion.div
               key={column.title}
