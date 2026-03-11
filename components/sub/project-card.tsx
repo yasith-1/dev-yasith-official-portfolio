@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -17,6 +18,17 @@ export const ProjectCard = ({
   description,
   link,
 }: ProjectCardProps) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [imgError, setImgError] = useState(false);
+
+  // Update image source if prop changes
+  useEffect(() => {
+    setImgSrc(src);
+    setImgError(false);
+  }, [src]);
+
+  const fallbackImage = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
+
   return (
     <motion.div
       whileHover={{ y: -10 }}
@@ -31,11 +43,12 @@ export const ProjectCard = ({
       >
         <div className="relative aspect-video w-full overflow-hidden">
           <Image
-            src={src}
+            src={imgError ? fallbackImage : imgSrc}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            onError={() => setImgError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#030014] to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
         </div>

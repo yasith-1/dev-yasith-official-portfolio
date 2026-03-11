@@ -28,6 +28,8 @@ export const SOCIALS = [
   },
 ] as const;
 
+export const GITHUB_USERNAME = "yasith-1";
+
 export const FRONTEND_SKILL = [
   {
     skill_name: "HTML",
@@ -142,7 +144,14 @@ export const OTHER_SKILL = [
   },
 ] as const;
 
-export const PROJECTS = [
+export interface Project {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+}
+
+export const PROJECTS: Project[] = [
   {
     title: "Hotel POS Management System",
     description:
@@ -162,16 +171,21 @@ export const PROJECTS = [
     description:
       "Desktop application managing books, customers, and fines with report generation using Java, JavaFX, Jasper Report, and MySQL.",
     image: "/projects/project-3.png",
-    link: "https://github.com/yasith-1",
+    link: "https://github.com/yasith-1/javaFX-library-management-system",
   },
   {
     title: "Burger Shop POS",
-    description:
-      "Web-based POS focused on DOM manipulation and UI/UX design using HTML, JavaScript, and CSS.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
-    link: "https://github.com/yasith-1",
+    description: "Web-based POS focused on DOM manipulation and UI/UX design using HTML, JavaScript, and CSS.",
+    image: "https://repository-images.githubusercontent.com/1016531246/d7f95791-dffb-4242-b9af-feaa067ead09",
+    link: "https://github.com/yasith-1/mos-burger",
   },
-] as const;
+  {
+    title: "Defence Management System",
+    description: "This project was built to understand all of the OOP concepts in JAVA . Used SWING for GUI create.",
+    image: "https://repository-images.githubusercontent.com/951761808/4deb487e-0a5e-46a6-9ed3-b598833efee8",
+    link: "https://github.com/yasith-1/Defence_Management_System_OOP",
+  },
+];
 
 export const FOOTER_DATA = [
   {
@@ -226,6 +240,11 @@ export const FOOTER_DATA = [
         name: "Certifications",
         icon: RxDotFilled,
         link: "#certifications",
+      },
+      {
+        name: "Download CV",
+        icon: RxDotFilled,
+        link: "/resume/Yashith_Prabhashwara_CV.pdf",
       },
     ],
   },
@@ -343,6 +362,12 @@ export const LINKS = {
 };
 
 export const TESTIMONIALS = [
+  {
+    name: "Sharada Marasinghe",
+    role: "Software Engineer | Lead Developer | Assistant Lecturer",
+    text: "Yashith Prabhashwara worked under my guidance, and during that time he demonstrated strong technical capability and a proactive attitude toward software development. He has solid experience with technologies such as the MERN stack, Java with Spring Boot, MySQL, MongoDB, Docker, and AWS. Yashith is highly motivated, detail-oriented, and capable of transforming ideas into practical, production-ready solutions. He works well both independently and as part of a team, and his willingness to continuously learn new technologies makes him a valuable asset to any development team. I wish him continued success in his software engineering career.",
+    image: "/testimonials/sharada.png",
+  },
   {
     name: "Praneeth Perera",
     role: "Co-Founder - Nexova, Pega Certified Lead System Architect (CLSA | CSSA | CSA)",
