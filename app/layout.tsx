@@ -4,13 +4,18 @@ import type { PropsWithChildren } from "react";
 
 import { Footer } from "@/components/main/footer";
 import { Navbar } from "@/components/main/navbar";
-import { StarsCanvas } from "@/components/main/star-background";
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
 import WhatsAppWidget from "@/components/sub/whatsapp-widget";
 import { WHATSAPP_CONFIG } from "@/constants";
+import dynamic from "next/dynamic";
 
 import "./globals.css";
+
+const StarsCanvas = dynamic(
+  () => import("@/components/main/star-background").then((mod) => mod.StarsCanvas),
+  { ssr: false }
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
