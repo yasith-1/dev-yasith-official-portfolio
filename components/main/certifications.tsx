@@ -4,6 +4,8 @@ import { CERTIFICATIONS } from "@/constants";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import { RxBadge, RxExternalLink } from "react-icons/rx";
+import { AnimatePresence } from "framer-motion";
+import React from "react";
 import { FaCertificate, FaAward, FaUserTie } from "react-icons/fa";
 
 const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number], index: number }) => {
@@ -36,7 +38,8 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
             transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
             viewport={{ once: true }}
             onMouseMove={handleMouseMove}
@@ -46,10 +49,10 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                 rotateY,
                 transformStyle: "preserve-3d",
             }}
-            className="group relative flex flex-col h-full bg-[#030014]/60 backdrop-blur-2xl border border-white/5 rounded-[40px] overflow-hidden transition-all duration-500 hover:border-purple-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            className="group relative flex flex-col h-full bg-[#030014]/60 backdrop-blur-2xl border border-white/5 rounded-[20px] overflow-hidden transition-all duration-500 hover:border-purple-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
             {/* Animated Gradient Border */}
-            <div className="absolute inset-0 p-[1.5px] rounded-[40px] bg-gradient-to-br from-purple-500/20 via-cyan-500/20 to-purple-500/20 group-hover:from-purple-500/50 group-hover:via-cyan-500/50 group-hover:to-purple-500/50 transition-all duration-500 -z-10" />
+            <div className="absolute inset-0 p-[1.5px] rounded-[20px] bg-gradient-to-br from-purple-500/20 via-cyan-500/20 to-purple-500/20 transition-all duration-500 -z-10" />
 
             {/* Glowing background highlights */}
             <div className="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/10 blur-[80px] rounded-full group-hover:bg-purple-600/20 transition-all duration-700" />
@@ -76,7 +79,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                 </div>
             </div>
 
-            <div className="flex flex-col p-5 pt-1 h-full z-10" style={{ transform: "translateZ(10px)" }}>
+            <div className="flex flex-col p-4 pt-1 h-full z-10" style={{ transform: "translateZ(10px)" }}>
                 <div className="flex justify-between items-center mb-3 text-xs">
                     <div className="flex items-center gap-2">
                         <span className="text-[10px] font-black text-cyan-400 bg-cyan-400/10 px-3 py-1.5 rounded-lg uppercase tracking-[0.2em] border border-cyan-400/20 shadow-[0_0_15px_rgba(34,211,238,0.1)]">
@@ -88,11 +91,11 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                     </span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-black text-white mb-3 leading-none tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-200 transition-all duration-300">
+                <h3 className="text-xl md:text-2xl font-black text-white mb-2 leading-none tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-200 transition-all duration-300">
                     {cert.title}
                 </h3>
 
-                <div className="flex items-center gap-2.5 mb-3 overflow-hidden">
+                <div className="flex items-center gap-2.5 mb-2 overflow-hidden">
                     <div className="p-1.5 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-400/80">
                         <FaUserTie className="text-xs" />
                     </div>
@@ -102,7 +105,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                     <div className="flex-1 h-[1px] bg-gradient-to-r from-purple-500/40 to-transparent" />
                 </div>
 
-                <p className="text-sm text-gray-400/90 line-clamp-3 mb-4 leading-relaxed font-medium">
+                <p className="text-sm text-gray-400/90 line-clamp-3 mb-3 leading-relaxed font-medium">
                     {cert.description}
                 </p>
 
@@ -121,7 +124,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                 {/* Footer Action */}
                 <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-auto">
                     <button
-                        onClick={() => window.open(cert.image, '_blank')}
+                        onClick={() => window.open(cert.link, '_blank')}
                         className="flex items-center gap-3 text-gray-400 hover:text-white transition-all duration-500 group/btn"
                     >
                         <span className="text-[13px] font-black tracking-widest uppercase">View Full Credential</span>
@@ -146,6 +149,9 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
 };
 
 export const Certifications = () => {
+    const [showAll, setShowAll] = React.useState(false);
+    const visibleCertifications = showAll ? CERTIFICATIONS : CERTIFICATIONS.slice(0, 6);
+
     return (
         <section
             id="certifications"
@@ -195,11 +201,37 @@ export const Certifications = () => {
                 </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-6 md:px-14 max-w-[1500px] w-full mt-10">
-                {CERTIFICATIONS.map((cert, index) => (
-                    <CertificationCard key={cert.title} cert={cert} index={index} />
-                ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-14 max-w-[1500px] w-full mt-10">
+                <AnimatePresence mode="popLayout">
+                    {visibleCertifications.map((cert, index) => (
+                        <CertificationCard key={cert.title} cert={cert} index={index} />
+                    ))}
+                </AnimatePresence>
             </div>
+
+            {CERTIFICATIONS.length > 6 && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="mt-12"
+                >
+                    <button
+                        onClick={() => setShowAll(!showAll)}
+                        className="group relative px-8 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-purple-500/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                        <span className="relative z-10 text-sm font-black text-white tracking-[0.2em] uppercase flex items-center gap-2">
+                            {showAll ? "Show Less" : "Show All"}
+                            <motion.div
+                                animate={{ rotate: showAll ? 180 : 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <RxBadge className="w-4 h-4 text-cyan-400" />
+                            </motion.div>
+                        </span>
+                    </button>
+                </motion.div>
+            )}
         </section>
     );
 };

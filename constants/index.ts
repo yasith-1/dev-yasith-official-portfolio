@@ -281,6 +281,7 @@ export const CERTIFICATIONS = [
     issuer: "KodeKloud",
     date: "February 22, 2026",
     image: "/certifications/aws-basics.png",
+    link: "https://learn.kodekloud.com/user/certificate/1104c32d-0b79-4395-83cf-217320912eb1",
     description: "Strengthened understanding of Amazon Web Services fundamentals, including cloud concepts, core AWS services, and real-world use cases.",
     instructor: "Sanjeev Thiyagarajan",
     skills: ["AWS", "Cloud Computing", "DevOps"]
@@ -290,6 +291,7 @@ export const CERTIFICATIONS = [
     issuer: "KodeKloud",
     date: "February 21, 2026",
     image: "/certifications/docker.png",
+    link: "https://learn.kodekloud.com/user/certificate/77400c31-ad47-409a-b72e-04cc882a4610",
     description: "Strengthened understanding of Docker, including containerization, images, and running applications efficiently in isolated environments.",
     instructor: "Mumshad Mannambeth",
     skills: ["Docker", "Containerization", "DevOps"]
@@ -299,6 +301,7 @@ export const CERTIFICATIONS = [
     issuer: "KodeKloud",
     date: "February 20, 2026",
     image: "/certifications/linux.png",
+    link: "https://learn.kodekloud.com/user/certificate/ceeabf6a-6592-480a-83f1-05550bafaecd",
     description: "Strengthened foundational Linux skills, covering essential commands, file management, and system navigation.",
     instructor: "Jeremy Morgan",
     skills: ["Linux", "System Admin", "Open Source"]
@@ -308,6 +311,7 @@ export const CERTIFICATIONS = [
     issuer: "KodeKloud",
     date: "February 15, 2026",
     image: "/certifications/kubernetes.png",
+    link: "https://learn.kodekloud.com/user/certificate/10b4b6c6-9dbf-4578-be84-c26002045a81",
     description: "Comprehensive introduction to Kubernetes, covering pods, services, deployments, and cluster management.",
     instructor: "Mumshad Mannambeth",
     skills: ["Kubernetes", "Orchestration", "Cloud Native"]
@@ -317,11 +321,53 @@ export const CERTIFICATIONS = [
     issuer: "Pro Code Lab (PCL)",
     date: "17 March 2025",
     image: "/certifications/git.png",
+    link: "https://drive.google.com/file/d/1ny_q6q7_2bj_0vvLG8HTJ18VDzgG6N-E/view",
     description: "Deep dive into Git and GitHub, covering branching, merging, pull requests, and professional collaboration workflows.",
     instructor: "PCL Instructors",
     skills: ["Git", "GitHub", "Version Control"]
   },
+  {
+    title: ".NET Development for Beginners",
+    issuer: "LinkedIn Learning",
+    date: "March 4, 2026",
+    image: "/certifications/dotnet.png",
+    link: "https://www.linkedin.com/learning/certificates/8c0c65440a361987121ecdd7673ab4d8c6d51817651af9d5bdc5e8e6e3769692?trk=share_certificate",
+    description: "A beginner-friendly introduction to the .NET ecosystem, covering what .NET is, what can be built with it, and environment setup.",
+    instructor: "Microsoft .NET",
+    skills: [".NET", "C#", "Development"]
+  },
+  {
+    title: "Learning Redux Toolkit",
+    issuer: "LinkedIn Learning",
+    date: "March 4, 2026",
+    image: "/certifications/redux-toolkit.png",
+    link: "https://www.linkedin.com/learning/certificates/b2ccf04e7c8e72d7b9fedf87b852a8bb5febeff862c836d2d851b1d455055a89?trk=share_certificate",
+    description: "Focused on modern state management in React applications using Redux Toolkit to simplify workflows and solve common state issues.",
+    instructor: "Ebenezer Don",
+    skills: ["Redux", "React", "State Management"]
+  },
+  {
+    title: "Spring 6: Spring Security",
+    issuer: "LinkedIn Learning",
+    date: "March 8, 2026",
+    image: "/certifications/spring-security.png",
+    link: "https://www.linkedin.com/learning/certificates/d1b879300b797f9c5bf56af77e3e1af2711a58e2ae9a3190a0009916dc6273bd?trk=share_certificate",
+    description: "A comprehensive guide to securing Java applications using Spring Security, covering authentication and advanced protection techniques.",
+    instructor: "Frank P Moley III",
+    skills: ["Spring Security", "Java", "Web Security"]
+  },
+  {
+    title: "Docker Foundations Professional Certificate",
+    issuer: "LinkedIn Learning",
+    date: "March 11, 2026",
+    image: "/certifications/docker-foundations.png",
+    link: "https://www.linkedin.com/learning/certificates/b9f11716213def56cbcac1ffb17a08b0706ba579e4c69fc9dcac0b8ea41de64a?trk=share_certificate",
+    description: "Validates foundational proficiency in Docker and containerization, including deep understanding of Docker products and their application.",
+    instructor: "Shea Hanson",
+    skills: ["Docker", "DevOps", "Containers"]
+  },
 ] as const;
+
 
 export const NAV_LINKS = [
   {
@@ -365,7 +411,7 @@ export const TESTIMONIALS = [
     name: "Praneeth Perera",
     role: "Co-Founder - Nexova, Pega Certified Lead System Architect (CLSA | CSSA | CSA)",
     text: "Yasith has a strong foundation in React and Java Spring Boot, and he quickly demonstrated his ability to build clean, scalable, and well-structured applications. His coding standards are excellent for an intern. He writes readable, maintainable code and shows a solid understanding of both frontend and backend architecture. Beyond his technical skills, what truly stands out is his presentation and communication ability. Yasith confidently explains complex technical concepts in a clear and structured manner, whether during internal demos. His ability to combine strong coding skills with effective communication makes him a valuable team member.",
-    image: "/testimonials/praneeth.png", // Paths for future images
+    image: "/testimonials/praneeth.png",
   },
   {
     name: "Prasad Ekanayake",
@@ -389,5 +435,5 @@ export const TESTIMONIALS = [
 
 export const WHATSAPP_CONFIG = {
   phoneNumber: "94701410113",
-  assistantName: "Yashith",
+  assistantName: "Yashith Prabhashwara",
 };

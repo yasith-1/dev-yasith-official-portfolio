@@ -53,15 +53,15 @@ export const ProjectCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-[#030014] to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
         </div>
 
-        <div className="flex flex-col flex-grow p-6">
+        <div className="flex flex-col flex-grow p-5">
           <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:from-purple-400 group-hover:to-cyan-400 transition-all duration-300">
             {title}
           </h2>
-          <p className="mt-3 text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
+          <p className="mt-2 text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
             {description}
           </p>
 
-          <div className="mt-auto pt-6 flex items-center gap-2 text-purple-400 font-medium text-sm group-hover:text-purple-300">
+          <div className="mt-auto pt-4 flex items-center gap-2 text-purple-400 font-medium text-sm group-hover:text-purple-300">
             <span>View Project</span>
             <svg
               className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"

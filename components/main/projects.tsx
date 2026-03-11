@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { ProjectCard } from "@/components/sub/project-card";
 import { PROJECTS, GITHUB_USERNAME, Project } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
+import { RxChevronDown } from "react-icons/rx";
 import { getGithubProjects } from "@/lib/github";
 
 export const Projects = () => {
   const [allProjects, setAllProjects] = useState<Project[]>(Array.from(PROJECTS));
   const [loading, setLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export const Projects = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-10 max-w-[1400px]"
+        className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-10 max-w-[1400px]"
       >
         <AnimatePresence mode="popLayout">
           {loading ? (
@@ -88,11 +90,12 @@ export const Projects = () => {
               />
             ))
           ) : (
-            allProjects.map((project, index) => (
+            allProjects.slice(0, showAll ? allProjects.length : 6).map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <ProjectCard
@@ -106,6 +109,30 @@ export const Projects = () => {
           )}
         </AnimatePresence>
       </motion.div>
+
+      {!loading && allProjects.length > 6 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-12"
+        >
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="group relative px-8 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-purple-500/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+            <span className="relative z-10 text-sm font-black text-white tracking-[0.2em] uppercase flex items-center gap-2">
+              {showAll ? "Show Less" : "Show All"}
+              <motion.div
+                animate={{ rotate: showAll ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <RxChevronDown className="w-5 h-5 text-cyan-400" />
+              </motion.div>
+            </span>
+          </button>
+        </motion.div>
+      )}
     </section>
   );
 };
