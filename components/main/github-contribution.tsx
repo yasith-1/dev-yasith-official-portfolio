@@ -8,15 +8,8 @@ import { slideInFromTop } from "@/lib/motion";
 import 'react-github-calendar/tooltips.css';
 
 export const GithubContribution = () => {
-    // Function to generate random levels for mock data if needed
-    const selectLastDays = (data: any[]) => {
-        return data.map((item) => ({
-            ...item,
-            // Randomly assign a level between 0 and 4 to simulate activity
-            level: Math.floor(Math.random() * 5),
-            count: Math.floor(Math.random() * 10)
-        }));
-    };
+    const [year, setYear] = React.useState<number | undefined>(new Date().getFullYear());
+    const years = [2026, 2025, 2024, 2023];
 
     // Custom theme for the GitHub calendar to match the "Space" portfolio theme
     const calendarTheme = {
@@ -59,7 +52,7 @@ export const GithubContribution = () => {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="text-[18px] text-white font-medium mt-[10px] text-center mb-[10px] opacity-70 max-w-[600px] px-4"
                 >
-                    Consistency is the key to mastering code. Here is my coding activity over the last year.
+                    Consistency is the key to mastering code. Here is my real-world coding activity.
                 </motion.p>
             </div>
 
@@ -70,21 +63,40 @@ export const GithubContribution = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="flex flex-col items-center justify-center w-full max-w-[1200px] px-4 md:px-0 z-20"
             >
-                <div className="w-full overflow-x-auto bg-[#030014]/40 border border-[#7042f850] p-6 rounded-3xl backdrop-blur-md flex justify-center items-center scrollbar-hidden">
-                    <div className="min-w-[800px] md:min-w-fit flex justify-center py-4">
-                        <GitHubCalendar
-                            username="yasith-1"
-                            blockSize={15}
-                            blockMargin={5}
-                            colorScheme='dark'
-                            fontSize={16}
-                            transformData={selectLastDays}
-                            style={{
-                                color: "#fff",
-                                maxWidth: "100%",
-                            }}
-                            theme={calendarTheme}
-                        />
+                <div className="w-full bg-[#030014]/40 border border-[#7042f850] p-4 md:p-8 rounded-3xl backdrop-blur-md flex flex-col lg:flex-row gap-8 justify-center items-start lg:items-center">
+                    <div className="flex-1 w-full overflow-x-auto scrollbar-hidden">
+                        <div className="min-w-[800px] flex justify-center py-4">
+                            <GitHubCalendar
+                                username="yasith-1"
+                                blockSize={15}
+                                blockMargin={5}
+                                year={year}
+                                colorScheme='dark'
+                                fontSize={16}
+                                style={{
+                                    color: "#fff",
+                                    maxWidth: "100%",
+                                }}
+                                theme={calendarTheme}
+                            />
+                        </div>
+                    </div>
+                    
+                    {/* Year Selector Sidebar - Matching GitHub UI */}
+                    <div className="flex flex-row lg:flex-col gap-2 w-full lg:w-32 justify-center lg:justify-start">
+                        {years.map((y) => (
+                            <button
+                                key={y}
+                                onClick={() => setYear(y)}
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                                    year === y 
+                                    ? "bg-[#238636] text-white shadow-[0_0_15px_rgba(35,134,54,0.4)]" 
+                                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10"
+                                }`}
+                            >
+                                {y}
+                            </button>
+                        ))}
                     </div>
                 </div>
             </motion.div>

@@ -20,7 +20,7 @@ export async function getGithubProjects() {
         const response = await fetch(
             `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
             {
-                next: { revalidate: 3600 }, // Cache for 1 hour
+                next: { revalidate: 0 }, // Always fetch fresh list on reload
             }
         );
 
@@ -61,9 +61,9 @@ export async function getGithubProjects() {
 export async function getCustomSocialPreview(repoUrl: string): Promise<string | null> {
     try {
         // We use a server-side fetch to get the HTML and find the og:image tag
-        // Using a shorter revalidation time (5 minutes) to ensure latest images are picked up
+        // Using a shorter revalidation time (1 minute) to ensure latest images are picked up
         const response = await fetch(repoUrl, { 
-            next: { revalidate: 300 },
+            next: { revalidate: 60 },
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 PortfolioBot'
             }

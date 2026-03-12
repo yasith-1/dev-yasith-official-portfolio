@@ -79,6 +79,12 @@ export const FRONTEND_SKILL = [
     width: 80,
     height: 80,
   },
+  {
+    skill_name: "Angular",
+    image: "angular.png",
+    width: 80,
+    height: 80,
+  },
 ] as const;
 
 export const BACKEND_SKILL = [
@@ -118,6 +124,24 @@ export const BACKEND_SKILL = [
     width: 70,
     height: 70,
   },
+  {
+    skill_name: "Java",
+    image: "java.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Spring Boot",
+    image: "springboot.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "PHP",
+    image: "php.png",
+    width: 80,
+    height: 80,
+  },
 ] as const;
 
 export const FULLSTACK_SKILL = [
@@ -132,6 +156,24 @@ export const FULLSTACK_SKILL = [
     image: "figma.png",
     width: 50,
     height: 50,
+  },
+  {
+    skill_name: "AWS",
+    image: "aws.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Kubernetes",
+    image: "kubernetes.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "CI/CD",
+    image: "cicd.png",
+    width: 80,
+    height: 80,
   },
 ] as const;
 
