@@ -192,7 +192,6 @@ export const TOOLS = [
     image: "postman.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "Docker Desktop",
@@ -205,28 +204,24 @@ export const TOOLS = [
     image: "swagger.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "IntelliJ IDEA",
     image: "intellij.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "VS Code",
     image: "vscode.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "NetBeans",
     image: "netbeans.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "MySQL Workbench",
@@ -245,21 +240,18 @@ export const TOOLS = [
     image: "dbeaver.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "Draw.io",
     image: "drawio.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
   {
     skill_name: "Jira",
     image: "jira.svg",
     width: 80,
     height: 80,
-    className: "invert",
   },
 ] as const;
 
