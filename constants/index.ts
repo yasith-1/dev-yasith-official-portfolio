@@ -126,7 +126,7 @@ export const BACKEND_SKILL = [
   },
   {
     skill_name: "Java",
-    image: "java.png",
+    image: "java.svg",
     width: 80,
     height: 80,
   },
@@ -159,7 +159,7 @@ export const FULLSTACK_SKILL = [
   },
   {
     skill_name: "AWS",
-    image: "aws.png",
+    image: "aws.svg",
     width: 80,
     height: 80,
   },
@@ -183,6 +183,83 @@ export const OTHER_SKILL = [
     image: "go.png",
     width: 60,
     height: 60,
+  },
+] as const;
+
+export const TOOLS = [
+  {
+    skill_name: "Postman",
+    image: "postman.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "Docker Desktop",
+    image: "docker.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Swagger",
+    image: "swagger.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "IntelliJ IDEA",
+    image: "intellij.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "VS Code",
+    image: "vscode.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "NetBeans",
+    image: "netbeans.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "MySQL Workbench",
+    image: "mysql.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "HeidiSQL",
+    image: "heidisql.png",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "DBeaver",
+    image: "dbeaver.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "Draw.io",
+    image: "drawio.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
+  },
+  {
+    skill_name: "Jira",
+    image: "jira.svg",
+    width: 80,
+    height: 80,
+    className: "invert",
   },
 ] as const;
 
@@ -215,7 +292,7 @@ export const PROJECTS: Project[] = [
     link: "https://github.com/yasith-1/mos-burger",
   },
   {
-    title: "Defence Management System",
+    title: "Defense Management System",
     description: "This project was built to understand all of the OOP concepts in JAVA . Used SWING for GUI create.",
     image: "https://repository-images.githubusercontent.com/951761808/4deb487e-0a5e-46a6-9ed3-b598833efee8",
     link: "https://github.com/yasith-1/Defence_Management_System_OOP",

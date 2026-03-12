@@ -2,6 +2,22 @@
 
 import { GITHUB_USERNAME } from "@/constants";
 
+// Helper for fetch with timeout
+async function fetchWithTimeout(url: string, options: RequestInit = {}, timeout = 8000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal,
+        });
+        clearTimeout(id);
+        return response;
+    } catch (error) {
+        clearTimeout(id);
+        throw error;
+    }
+}
 
 export interface GithubRepo {
     id: number;
@@ -17,11 +33,12 @@ export interface GithubRepo {
 
 export async function getGithubProjects() {
     try {
-        const response = await fetch(
+        const response = await fetchWithTimeout(
             `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
             {
-                next: { revalidate: 0 }, // Always fetch fresh list on reload
-            }
+                next: { revalidate: 3600 }, // Cache for 1 hour to reduce hits
+            },
+            10000 // 10s timeout for main repo list
         );
 
         if (!response.ok) {
@@ -30,11 +47,6 @@ export async function getGithubProjects() {
 
         const repos: GithubRepo[] = await response.json();
 
-        // Filter rules:
-        // 1. Must have a description
-        // 2. Is not the profile README (repo named GITHUB_USERNAME)
-        // 3. Is not a fork
-        // 4. MUST have the 'portfolio' topic to be shown as a completed project
         const filteredRepos = repos.filter(
             (repo) =>
                 repo.description &&
@@ -43,7 +55,6 @@ export async function getGithubProjects() {
                 repo.topics.includes("portfolio")
         );
 
-        // Sort by push date (latest first)
         return filteredRepos.sort((a, b) =>
             new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
         );
@@ -60,16 +71,14 @@ export async function getGithubProjects() {
  */
 export async function getCustomSocialPreview(repoUrl: string): Promise<string | null> {
     try {
-        // We use a server-side fetch to get the HTML and find the og:image tag
-        // Using a shorter revalidation time (1 minute) to ensure latest images are picked up
-        const response = await fetch(repoUrl, { 
-            next: { revalidate: 60 },
+        // Use a shorter timeout for preview-scraping as it's secondary
+        const response = await fetchWithTimeout(repoUrl, { 
+            next: { revalidate: 3600 }, // Cache for 1 hour
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 PortfolioBot'
             }
-        });
+        }, 5000); // 5s timeout
 
-        
         if (!response.ok) return null;
         
         const html = await response.text();
@@ -78,8 +87,6 @@ export async function getCustomSocialPreview(repoUrl: string): Promise<string | 
         if (ogImageMatch && ogImageMatch[1]) {
             const ogImageUrl = ogImageMatch[1];
             
-            // GitHub serves custom social previews from repository-images.githubusercontent.com
-            // Generated previews are typically from opengraph.githubassets.com
             if (ogImageUrl.includes("repository-images.githubusercontent.com")) {
                 return ogImageUrl;
             }
@@ -87,7 +94,7 @@ export async function getCustomSocialPreview(repoUrl: string): Promise<string | 
         
         return null;
     } catch (error) {
-        console.error("Error fetching social preview:", error);
+        // Silently fail for previews as we have fallbacks
         return null;
     }
 }
