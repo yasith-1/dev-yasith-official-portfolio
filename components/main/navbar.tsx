@@ -31,13 +31,15 @@ export const Navbar = () => {
         <div className="hidden lg:flex flex-row items-center gap-6">
           <div className="flex items-center gap-6 bg-[#030014]/50 border border-white/10 px-6 py-2 rounded-full text-gray-300 text-sm font-medium">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.title}
-                href={link.link}
-                className="cursor-pointer hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300"
-              >
-                {link.title}
-              </a>
+              link && link.title && (
+                <a
+                  key={link.title}
+                  href={link.link}
+                  className="cursor-pointer hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300"
+                >
+                  {link.title}
+                </a>
+              )
             ))}
 
             {/* Source Code */}
@@ -84,14 +86,16 @@ export const Navbar = () => {
       <div className={`fixed top-[70px] left-0 w-full h-screen bg-[#030014]/95 backdrop-blur-2xl transition-all duration-500 ease-in-out z-[99] ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col items-center justify-center h-full gap-8">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.title}
-              href={link.link}
-              className="text-lg sm:text-2xl font-bold tracking-widest text-gray-400 hover:text-white transition-all"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.title}
-            </a>
+            link && link.title && (
+              <a
+                key={link.title}
+                href={link.link}
+                className="text-lg sm:text-2xl font-bold tracking-widest text-gray-400 hover:text-white transition-all"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.title}
+              </a>
+            )
           ))}
           <a
             href={LINKS.sourceCode}

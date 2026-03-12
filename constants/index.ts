@@ -490,21 +490,21 @@ export const NAV_LINKS = [
     link: "#experience",
   },
   {
-    title: "Projects",
-    link: "#projects",
-  },
-  {
-    title: "Testimonials",
-    link: "#testimonials",
-  },
-  {
     title: "Skills",
     link: "#skills",
+  },
+  {
+    title: "Projects",
+    link: "#projects",
   },
   {
     title: "Certifications",
     link: "#certifications",
   },
+  {
+    title: "Recommendation",
+    link: "#testimonials",
+  }
 ] as const;
 
 export const LINKS = {
