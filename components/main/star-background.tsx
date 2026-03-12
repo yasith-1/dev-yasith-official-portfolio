@@ -13,13 +13,13 @@ import type { Points as PointsType } from "three";
 export const StarBackground = (props: PointsInstancesProps) => {
   const ref = useRef<PointsType | null>(null);
   const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(5000), { radius: 1.2 }),
+    random.inSphere(new Float32Array(3000), { radius: 1.2 }),
   );
 
   useFrame((_state, delta) => {
     if (ref.current) {
-      ref.current.rotation.x -= delta / 10;
-      ref.current.rotation.y -= delta / 15;
+      ref.current.rotation.x -= delta / 12;
+      ref.current.rotation.y -= delta / 18;
     }
   });
 
@@ -48,7 +48,7 @@ export const StarsCanvas = () => (
   <div className="w-full h-auto fixed inset-0 -z-10">
     <Canvas
       camera={{ position: [0, 0, 1] }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       gl={{ antialias: false, powerPreference: "high-performance" }}
     >
       <Suspense fallback={null}>
@@ -57,3 +57,4 @@ export const StarsCanvas = () => (
     </Canvas>
   </div>
 );
+

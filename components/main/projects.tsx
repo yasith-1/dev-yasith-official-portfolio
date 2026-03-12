@@ -2,82 +2,34 @@
 
 import React, { useEffect, useState } from "react";
 import { ProjectCard } from "@/components/sub/project-card";
-import { PROJECTS, GITHUB_USERNAME, Project } from "@/constants";
+import { Project } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
 import { RxChevronDown } from "react-icons/rx";
-import { getGithubProjects, getCustomSocialPreview } from "@/lib/github";
+import { getEnhancedProjects } from "@/lib/github";
 
 
 export const Projects = () => {
-  const [allProjects, setAllProjects] = useState<Project[]>(Array.from(PROJECTS));
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    const fetchGithubRepos = async () => {
+    const fetchProjects = async () => {
       try {
-        const githubRepos = await getGithubProjects();
-
-        // 1. Check all static projects for custom social previews on GitHub
-        const updatedStaticProjects = await Promise.all(
-          PROJECTS.map(async (project) => {
-            if (project.link.includes("github.com/") && 
-                project.link.replace(/\/$/, "").split("/").length > 4) {
-              
-              const customPreview = await getCustomSocialPreview(project.link);
-              if (customPreview) {
-                return { ...project, image: customPreview };
-              }
-            }
-            return project;
-          })
-        );
-
-        // 2. Transform and check Dynamic Github repos for custom previews
-        const dynamicProjects: Project[] = await Promise.all(
-          githubRepos.map(async (repo) => {
-            const title = repo.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-            
-            // Check for custom social preview first to ensure latest is used
-            const customPreview = await getCustomSocialPreview(repo.html_url);
-            
-            return {
-              title,
-              description: repo.description,
-              // Fallback to opengraph proxy ONLY if custom preview isn't found
-              image: customPreview || `https://opengraph.githubassets.com/${repo.id}/${GITHUB_USERNAME}/${repo.name}`,
-              link: repo.html_url,
-            };
-          })
-        );
-
-        // 3. Merge updated static projects with dynamic ones
-        const merged = [...updatedStaticProjects];
-
-
-        dynamicProjects.forEach(dProj => {
-          const isDuplicate = merged.some(sProj =>
-            sProj.link.toLowerCase().includes(dProj.link.toLowerCase()) ||
-            sProj.title.toLowerCase() === dProj.title.toLowerCase()
-          );
-
-          if (!isDuplicate) {
-            merged.push(dProj);
-          }
-        });
-
-        setAllProjects(merged);
+        const enhancedProjects = await getEnhancedProjects();
+        setAllProjects(enhancedProjects);
       } catch (error) {
-        console.error("Failed to fetch Github projects", error);
+        console.error("Failed to fetch enhanced projects", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchGithubRepos();
+    fetchProjects();
   }, []);
+
 
 
   if (!isMounted) return null;

@@ -13,20 +13,21 @@ import {
 
 export const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [currentTime, setCurrentTime] = useState("");
 
-  // Update time for the personal touch
+  const getLocalTime = () =>
+    new Date().toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Colombo",
+    });
+
+  const [currentTime, setCurrentTime] = useState(getLocalTime);
+
+  // Update time — only HH:MM shown, so per-minute updates are sufficient
   useEffect(() => {
-    const updateTime = () => {
-      const time = new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        timeZone: "Asia/Colombo", // Assuming Sri Lanka based on previous context
-      });
-      setCurrentTime(time);
-    };
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
+    const timer = setInterval(() => {
+      setCurrentTime(getLocalTime());
+    }, 60_000);
     return () => clearInterval(timer);
   }, []);
 

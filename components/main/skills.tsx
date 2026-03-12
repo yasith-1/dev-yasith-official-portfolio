@@ -3,6 +3,7 @@
 import { SkillDataProvider } from "@/components/sub/skill-data-provider";
 import { SkillText } from "@/components/sub/skill-text";
 import React, { useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 import {
   BACKEND_SKILL,
@@ -30,8 +31,14 @@ export const Skills = () => {
   const [activeTab, setActiveTab] = useState<MainTab>("languages");
   const [activeLangTab, setActiveLangTab] = useState<LangSubTab>("frontend");
 
+  // Intersection observer to only play video when in view
+  const { ref: sectionRef, inView } = useInView({
+    threshold: 0.1,
+  });
+
   return (
     <section
+      ref={sectionRef}
       id="skills"
       className="flex flex-col items-center justify-center gap-3 h-full relative overflow-hidden py-10 md:py-20"
     >
@@ -44,8 +51,8 @@ export const Skills = () => {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-5 py-2 rounded-xl border border-[#7042f88b] transition-all duration-300 text-sm font-medium ${activeTab === tab.id
-                ? "bg-purple-500 text-white shadow-lg shadow-purple-500/30"
-                : "text-gray-200 hover:bg-[#7042f83b]"
+              ? "bg-purple-500 text-white shadow-lg shadow-purple-500/30"
+              : "text-gray-200 hover:bg-[#7042f83b]"
               }`}
           >
             {tab.label}
@@ -61,8 +68,8 @@ export const Skills = () => {
               key={tab.id}
               onClick={() => setActiveLangTab(tab.id)}
               className={`px-4 py-1.5 rounded-lg border text-xs font-semibold tracking-wide transition-all duration-300 ${activeLangTab === tab.id
-                  ? "border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow shadow-cyan-500/20"
-                  : "border-[#7042f850] text-gray-400 hover:border-cyan-500/50 hover:text-cyan-400"
+                ? "border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow shadow-cyan-500/20"
+                : "border-[#7042f850] text-gray-400 hover:border-cyan-500/50 hover:text-cyan-400"
                 }`}
             >
               {tab.label}
@@ -136,20 +143,23 @@ export const Skills = () => {
         </div>
       )}
 
-      {/* Background Video */}
+      {/* Background Video - Only load and play if in view */}
       <div className="w-full h-full absolute">
         <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-cover">
-          <video
-            className="w-full h-auto"
-            preload="false"
-            playsInline
-            loop
-            muted
-            autoPlay
-            src="/cards-video.webm"
-          />
+          {inView && (
+            <video
+              className="w-full h-auto"
+              preload="metadata"
+              playsInline
+              loop
+              muted
+              autoPlay
+              src="/cards-video.webm"
+            />
+          )}
         </div>
       </div>
     </section>
   );
 };
+

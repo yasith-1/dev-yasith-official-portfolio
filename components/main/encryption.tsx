@@ -2,12 +2,21 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useInView } from "react-intersection-observer";
 
 import { slideInFromTop } from "@/lib/motion";
 
 export const Encryption = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+  });
+
   return (
-    <div className="flex flex-row relative items-center justify-center min-h-screen w-full h-full -z-20">
+    <div
+      ref={ref}
+      className="flex flex-row relative items-center justify-center min-h-screen w-full h-full -z-20"
+    >
       <div className="absolute w-auto h-auto top-0 z-[5] px-4">
         <motion.div
           variants={slideInFromTop(0.5)}
@@ -24,6 +33,7 @@ export const Encryption = () => {
             alt="Lock top"
             width={50}
             height={50}
+            loading="lazy"
             className="translate-y-5 transition-all duration-200 group-hover:translate-y-11"
           />
           <Image
@@ -31,6 +41,7 @@ export const Encryption = () => {
             alt="Lock main"
             width={70}
             height={70}
+            loading="lazy"
             className="z-10"
           />
         </div>
@@ -47,17 +58,20 @@ export const Encryption = () => {
       </div>
 
       <div className="w-full flex items-start justify-center absolute">
-        <video
-          loop
-          muted
-          autoPlay
-          playsInline
-          preload="false"
-          className="w-full h-auto"
-        >
-          <source src="/videos/encryption-bg.webm" type="video/webm" />
-        </video>
+        {inView && (
+          <video
+            loop
+            muted
+            autoPlay
+            playsInline
+            preload="metadata"
+            className="w-full h-auto"
+          >
+            <source src="/videos/encryption-bg.webm" type="video/webm" />
+          </video>
+        )}
       </div>
     </div>
   );
 };
+

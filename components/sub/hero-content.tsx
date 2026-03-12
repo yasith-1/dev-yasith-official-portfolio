@@ -134,6 +134,8 @@ export const HeroContent = () => {
               className="object-cover select-none transition-all duration-700 ease-in-out"
               draggable={false}
               priority
+              quality={90}
+              sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 480px"
             />
           </div>
 
