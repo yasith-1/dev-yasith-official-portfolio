@@ -178,12 +178,12 @@ export const FULLSTACK_SKILL = [
 ] as const;
 
 export const OTHER_SKILL = [
-  {
-    skill_name: "Go",
-    image: "go.png",
-    width: 60,
-    height: 60,
-  },
+  // {
+  //   skill_name: "Go",
+  //   image: "go.png",
+  //   width: 60,
+  //   height: 60,
+  // },
 ] as const;
 
 export const TOOLS = [
