@@ -33,10 +33,12 @@ export interface GithubRepo {
 
 export async function getGithubProjects() {
     try {
+        const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 300;
+
         const response = await fetchWithTimeout(
             `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
             {
-                next: { revalidate: 3600 }, // Cache for 1 hour
+                next: { revalidate: revalidateTime }, // Auto-sync in dev, cache in prod
             },
             10000
         );
@@ -69,8 +71,10 @@ export async function getGithubProjects() {
  */
 export async function getCustomSocialPreview(repoUrl: string): Promise<string | null> {
     try {
+        const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 300;
+        
         const response = await fetchWithTimeout(repoUrl, {
-            next: { revalidate: 3600 },
+            next: { revalidate: revalidateTime },
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 PortfolioBot'
             }
@@ -117,7 +121,13 @@ export async function getEnhancedProjects(): Promise<Project[]> {
         // 3. Transform dynamic repos
         const dynamicProjects: Project[] = await Promise.all(
             githubRepos.map(async (repo) => {
-                const title = repo.name
+                let cleanRepoName = repo.name;
+                if (cleanRepoName.toLowerCase().startsWith(`${GITHUB_USERNAME.toLowerCase()}-`) || 
+                    cleanRepoName.toLowerCase().startsWith(`${GITHUB_USERNAME.toLowerCase()}_`)) {
+                    cleanRepoName = cleanRepoName.substring(GITHUB_USERNAME.length + 1);
+                }
+
+                const title = cleanRepoName
                     .split(/[-_]/)
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join(' ');
