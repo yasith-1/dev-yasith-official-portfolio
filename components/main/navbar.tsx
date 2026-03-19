@@ -9,7 +9,7 @@ export const Navbar = () => {
 
   return (
     <div className="w-full h-[70px] fixed top-0 backdrop-blur-xl bg-[#030014]/50 z-[100] border-b border-white/5 transition-all duration-300">
-      <div className="w-full h-full flex items-center justify-between m-auto px-6 md:px-10 lg:px-20 max-w-[1400px]">
+      <div className="w-full h-full flex items-center justify-between m-auto px-6 md:px-10 lg:px-20 max-w-[1400px] relative">
         {/* Logo + Name */}
         <Link
           href="#about-me"
@@ -27,8 +27,8 @@ export const Navbar = () => {
           </div>
         </Link>
 
-        {/* Web Navbar */}
-        <div className="hidden lg:flex flex-row items-center gap-6">
+        {/* Web Navbar (Centered) */}
+        <div className="hidden lg:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
           <div className="flex items-center gap-6 bg-[#030014]/50 border border-white/10 px-6 py-2 rounded-full text-gray-300 text-sm font-medium">
             {NAV_LINKS.map((link) => (
               link && link.title && (
@@ -41,20 +41,13 @@ export const Navbar = () => {
                 </a>
               )
             ))}
-
-            {/* Source Code */}
-            <a
-              href={LINKS.sourceCode}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="cursor-pointer hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300"
-            >
-              Source Code
-            </a>
           </div>
+        </div>
 
+        {/* Right Section: Socials + Hamburger */}
+        <div className="flex flex-row items-center gap-3">
           {/* Social Icons (Web) */}
-          <div className="flex flex-row gap-3 ml-2">
+          <div className="hidden lg:flex flex-row gap-3">
             {SOCIALS.map(({ link, name, icon: Icon }) => (
               <a
                 href={link}
@@ -67,19 +60,19 @@ export const Navbar = () => {
               </a>
             ))}
           </div>
-        </div>
 
-        {/* Hamburger Menu */}
-        <button
-          className="lg:hidden text-white focus:outline-none p-2 rounded-lg bg-white/5 border border-white/10"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-          ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-          )}
-        </button>
+          {/* Hamburger Menu */}
+          <button
+            className="lg:hidden text-white focus:outline-none p-2 rounded-lg bg-white/5 border border-white/10"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

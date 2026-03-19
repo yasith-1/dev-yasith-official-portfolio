@@ -37,10 +37,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <StarsCanvas />
         <Navbar />
         {children}
-        {/* <WhatsAppWidget
-          phoneNumber={WHATSAPP_CONFIG.phoneNumber}
-          assistantName={WHATSAPP_CONFIG.assistantName}
-        /> */}
         <Footer />
         <Script id="tawk-to" strategy="afterInteractive">
           {`
