@@ -49,7 +49,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                 rotateY,
                 transformStyle: "preserve-3d",
             }}
-            className="group relative flex flex-col h-full bg-[#030014]/60 backdrop-blur-2xl border border-white/5 rounded-[20px] overflow-hidden transition-all duration-500 hover:border-purple-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            className="group relative flex flex-col h-fit bg-[#030014]/60 backdrop-blur-2xl border border-white/5 rounded-[20px] overflow-hidden transition-all duration-500 hover:border-purple-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
             {/* Animated Gradient Border */}
             <div className="absolute inset-0 p-[1.5px] rounded-[20px] bg-gradient-to-br from-purple-500/20 via-cyan-500/20 to-purple-500/20 transition-all duration-500 -z-10" />
@@ -91,7 +91,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                     </span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-black text-white mb-2 leading-none tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-200 transition-all duration-300">
+                <h3 className="text-xl md:text-2xl font-black text-white mb-2 leading-tight tracking-tight min-h-[56px] md:min-h-[64px] line-clamp-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-200 transition-all duration-300">
                     {cert.title}
                 </h3>
 
@@ -105,7 +105,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                     <div className="flex-1 h-[1px] bg-gradient-to-r from-purple-500/40 to-transparent" />
                 </div>
 
-                <p className="text-sm text-gray-400/90 line-clamp-3 mb-3 leading-relaxed font-medium">
+                <p className="text-sm text-gray-400/90 line-clamp-3 min-h-[68px] mb-3 leading-relaxed font-medium">
                     {cert.description}
                 </p>
 
@@ -122,14 +122,14 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                 </div>
 
                 {/* Footer Action */}
-                <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-auto">
+                <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-4">
                     <button
                         onClick={() => window.open(cert.link, '_blank')}
                         className="flex items-center gap-3 text-gray-400 hover:text-white transition-all duration-500 group/btn"
                     >
                         <span className="text-[13px] font-black tracking-widest uppercase">View Full Credential</span>
                         <div className="relative">
-                            <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover/btn:bg-purple-500 group-hover/btn:text-white group-hover/btn:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500 group-hover/btn:rotate-12">
+                            <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover/btn:bg-purple-500 group-hover/btn:text-white group-hover/btn:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500 ">
                                 <RxExternalLink className="w-4 h-4" />
                             </div>
                         </div>
