@@ -178,12 +178,12 @@ export const FULLSTACK_SKILL = [
 ] as const;
 
 export const OTHER_SKILL = [
-  {
-    skill_name: "Go",
-    image: "go.png",
-    width: 60,
-    height: 60,
-  },
+  // {
+  //   skill_name: "Go",
+  //   image: "go.png",
+  //   width: 60,
+  //   height: 60,
+  // },
 ] as const;
 
 export const TOOLS = [
@@ -263,13 +263,13 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
-  {
-    title: "Hotel POS Management System",
-    description:
-      "Multi-company POS system built with layered architecture using Spring Boot (JDBC Template, JWT authentication) and React (Redux state management). Implemented real-time updates via WebSocket, automated database migrations with Flyway, and API documentation with Swagger.",
-    image: "/projects/project-1.png",
-    link: "https://github.com/yasith-1",
-  },
+  // {
+  //   title: "Hotel POS Management System",
+  //   description:
+  //     "Multi-company POS system built with layered architecture using Spring Boot (JDBC Template, JWT authentication) and React (Redux state management). Implemented real-time updates via WebSocket, automated database migrations with Flyway, and API documentation with Swagger.",
+  //   image: "/projects/project-1.png",
+  //   link: "https://github.com/yasith-1",
+  // },
   {
     title: "Library Management System",
     description:
