@@ -128,7 +128,7 @@ export const HeroContent = () => {
         <div className="relative blob-frame h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[480px] lg:w-[480px] flex items-center justify-center p-4 bg-transparent">
           <div className="relative overflow-hidden blob-inner h-full w-full border-4 border-white/5 shadow-2xl">
             <Image
-              src="/profile.jpg"
+              src="/images/profile.jpg"
               alt="Yashith Prabhashwara"
               fill
               className="object-cover select-none transition-all duration-700 ease-in-out"

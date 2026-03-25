@@ -67,6 +67,7 @@
   ],
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@openrouter/sdk": "^0.9.11",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@types/qrcode.react": "^1.0.5",

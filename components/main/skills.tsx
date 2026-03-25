@@ -154,7 +154,7 @@ export const Skills = () => {
               loop
               muted
               autoPlay
-              src="/cards-video.webm"
+              src="/videos/skills-bg.webm"
             />
           )}
         </div>

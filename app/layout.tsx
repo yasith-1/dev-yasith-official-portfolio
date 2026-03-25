@@ -17,6 +17,10 @@ const StarsCanvas = dynamic(
   () => import("@/components/main/star-background").then((mod) => mod.StarsCanvas)
 );
 
+const AIAssistant = dynamic(
+  () => import("@/components/main/ai-assistant").then((mod) => mod.AIAssistant)
+);
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
@@ -38,6 +42,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <Navbar />
         {children}
         <Footer />
+        <AIAssistant />
         <Script id="tawk-to" strategy="afterInteractive">
           {`
             var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

@@ -29,7 +29,7 @@ export const Encryption = () => {
       <div className="flex flex-col items-center justify-center translate-y-[-50px] absolute z-[20] w-auto h-auto">
         <div className="flex flex-col items-center group cursor-pointer w-auto h-auto">
           <Image
-            src="/lock-top.png"
+            src="/images/encryption/lock-top.png"
             alt="Lock top"
             width={50}
             height={50}
@@ -37,7 +37,7 @@ export const Encryption = () => {
             className="translate-y-5 transition-all duration-200 group-hover:translate-y-11"
           />
           <Image
-            src="/lock-main.png"
+            src="/images/encryption/lock-main.png"
             alt="Lock main"
             width={70}
             height={70}
