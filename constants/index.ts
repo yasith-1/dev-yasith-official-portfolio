@@ -361,7 +361,7 @@ export const JOURNEY = [
     location: "NEXOVA IT SOLUTIONS",
     description: "Collaboration with a development team to build a POS system. Contributing as a Full-Stack Developer to both frontend and backend development using React and Spring Boot, with MySQL as the database. Involved in API integration & Testing, UI design, and applying OOP and clean code principles.",
     icon: null,
-    date: "Sep 2025 - Present",
+    date: "Sep 2025 - Feb 2026",
   },
   {
     title: "Startup Tech Community Member",
