@@ -182,7 +182,7 @@ export const OTHER_SKILL = [
   //   skill_name: "Go",
   //   image: "go.png",
   //   width: 60,
-  //   height: 60,
+  //   height: 600,
   // },
 ] as const;
 
