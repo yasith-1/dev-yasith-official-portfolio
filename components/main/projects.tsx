@@ -4,12 +4,13 @@ import React, { useEffect, useState } from "react";
 import { ProjectCard } from "@/components/sub/project-card";
 import { Project } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
-import { RxChevronDown } from "react-icons/rx";
+import { RxBadge, RxChevronDown } from "react-icons/rx";
 import { getEnhancedProjects } from "@/lib/github";
 
 
 export const Projects = () => {
   const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [visibleProjectsCount, setVisibleProjectsCount] = useState<number>(3);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -39,6 +40,19 @@ export const Projects = () => {
       id="projects"
       className="flex flex-col items-center justify-center py-20 z-[20]"
     >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "backOut" }}
+        className="relative px-6 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl mb-8 group cursor-default overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-purple-500/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        <div className="flex items-center gap-3 relative z-10">
+          <RxBadge className="text-cyan-400 h-5 w-5 animate-pulse" />
+          <span className="text-[13px] font-black text-white tracking-[0.3em] uppercase">Developments</span>
+        </div>
+      </motion.div>
+
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +81,7 @@ export const Projects = () => {
               />
             ))
           ) : (
-            allProjects.slice(0, showAll ? allProjects.length : 6).map((project, index) => (
+            allProjects.slice(0, showAll ? allProjects.length : visibleProjectsCount).map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 20 }}

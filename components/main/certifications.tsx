@@ -150,7 +150,7 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
 
 export const Certifications = () => {
     const [showAll, setShowAll] = React.useState(false);
-    const visibleCertifications = showAll ? CERTIFICATIONS : CERTIFICATIONS.slice(0, 6);
+    const visibleCertifications = showAll ? CERTIFICATIONS : CERTIFICATIONS.slice(0, 3);
 
     return (
         <section
