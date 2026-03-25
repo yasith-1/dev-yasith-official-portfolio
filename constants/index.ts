@@ -544,7 +544,4 @@ export const TESTIMONIALS = [
   }
 ] as const;
 
-export const WHATSAPP_CONFIG = {
-  phoneNumber: "94701410113",
-  assistantName: "Yashith Prabhashwara",
-};
+

@@ -6,8 +6,6 @@ import { Footer } from "@/components/main/footer";
 import { Navbar } from "@/components/main/navbar";
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
-import WhatsAppWidget from "@/components/sub/whatsapp-widget";
-import { WHATSAPP_CONFIG } from "@/constants";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 
