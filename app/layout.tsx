@@ -52,6 +52,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
             s1.setAttribute('crossorigin','*');
             s0.parentNode.insertBefore(s1,s0);
             })();
+            
+            Tawk_API.onLoad = function(){
+                if (window.innerWidth < 768) {
+                    Tawk_API.hideAttentionGrabber();
+                }
+            };
           `}
         </Script>
       </body>
