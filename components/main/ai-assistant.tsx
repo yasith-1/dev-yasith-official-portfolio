@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaPaperPlane, FaTimes, FaRocket } from 'react-icons/fa';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import ReactMarkdown from 'react-markdown';
+
 
 // Helper for tailwind classes
 function cn(...inputs: ClassValue[]) {
@@ -82,7 +84,7 @@ export const AIAssistant = () => {
                   <FaRobot />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-sm tracking-widest">ASTRA</h3>
+                  <h3 className="text-white font-bold text-sm tracking-widest">ASTERA</h3>
                   <div className="flex items-center gap-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
                     <span className="text-[10px] text-blue-300 uppercase tracking-tighter">System Online</span>
@@ -113,6 +115,7 @@ export const AIAssistant = () => {
                 </div>
               )}
 
+
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
@@ -125,9 +128,18 @@ export const AIAssistant = () => {
                       : "mr-auto bg-purple-900/20 border border-purple-500/30 text-blue-100"
                   )}
                 >
-                  {msg.content}
+                  {msg.role === 'assistant' ? (
+                    <div className="prose prose-invert prose-sm max-w-none text-blue-100">
+                      <ReactMarkdown>
+                        {msg.content}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    msg.content
+                  )}
                 </motion.div>
               ))}
+
 
               {isLoading && (
                 <div className="flex items-center gap-2 text-blue-400 p-2 text-xs italic">
