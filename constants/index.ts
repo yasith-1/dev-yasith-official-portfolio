@@ -260,7 +260,14 @@ export interface Project {
   description: string;
   image: string;
   link: string;
+  createdAt: string;
 }
+
+export const PROJECTS_ORDER = [
+  "Library Management System",
+  "Burger Shop POS",
+  "Defense Management System",
+] as string[];
 
 export const PROJECTS: Project[] = [
   // {
@@ -276,18 +283,21 @@ export const PROJECTS: Project[] = [
       "Desktop application managing books, customers, and fines with report generation using Java, JavaFX, Jasper Report, and MySQL.",
     image: "/projects/project-3.png",
     link: "https://github.com/yasith-1/javaFX-library-management-system",
+    createdAt: "2024-05-15T00:00:00Z",
   },
   {
     title: "Burger Shop POS",
     description: "Web-based POS focused on DOM manipulation and UI/UX design using HTML, JavaScript, and CSS.",
     image: "https://repository-images.githubusercontent.com/1016531246/d7f95791-dffb-4242-b9af-feaa067ead09",
     link: "https://github.com/yasith-1/mos-burger",
+    createdAt: "2024-06-20T00:00:00Z",
   },
   {
     title: "Defense Management System",
     description: "This project was built to understand all of the OOP concepts in JAVA . Used SWING for GUI create.",
     image: "https://repository-images.githubusercontent.com/951761808/4deb487e-0a5e-46a6-9ed3-b598833efee8",
     link: "https://github.com/yasith-1/Defence_Management_System_OOP",
+    createdAt: "2024-04-10T00:00:00Z",
   },
 ];
 

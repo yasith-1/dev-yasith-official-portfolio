@@ -1,6 +1,6 @@
 "use server";
 
-import { GITHUB_USERNAME, PROJECTS, Project } from "@/constants";
+import { GITHUB_USERNAME, PROJECTS, Project, PROJECTS_ORDER } from "@/constants";
 
 // Helper for fetch with timeout
 async function fetchWithTimeout(url: string, options: RequestInit = {}, timeout = 8000) {
@@ -29,6 +29,7 @@ export interface GithubRepo {
     language: string;
     topics: string[];
     pushed_at: string;
+    created_at: string;
 }
 
 export async function getGithubProjects() {
@@ -58,7 +59,7 @@ export async function getGithubProjects() {
         );
 
         return filteredRepos.sort((a, b) =>
-            new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
     } catch (error) {
         console.error("Error fetching GitHub projects:", error);
@@ -139,12 +140,13 @@ export async function getEnhancedProjects(): Promise<Project[]> {
                     description: repo.description,
                     image: customPreview || `https://opengraph.githubassets.com/${repo.id}/${GITHUB_USERNAME}/${repo.name}`,
                     link: repo.html_url,
+                    createdAt: repo.created_at,
                 };
             })
         );
 
         // 4. Merge
-        const merged = [...staticWithPreviews];
+        const merged: Project[] = [...staticWithPreviews];
         dynamicProjects.forEach(dProj => {
             const isDuplicate = merged.some(sProj =>
                 sProj.link.toLowerCase().includes(dProj.link.toLowerCase()) ||
@@ -153,7 +155,23 @@ export async function getEnhancedProjects(): Promise<Project[]> {
             if (!isDuplicate) merged.push(dProj);
         });
 
-        return merged;
+        // 5. Custom Sort based on PROJECTS_ORDER
+        const sorted = merged.sort((a, b) => {
+            const orderA = PROJECTS_ORDER.indexOf(a.title);
+            const orderB = PROJECTS_ORDER.indexOf(b.title);
+
+            // If both are in the order list, sort by their order
+            if (orderA !== -1 && orderB !== -1) return orderA - orderB;
+            // If only A is in the order list, it comes first
+            if (orderA !== -1) return -1;
+            // If only B is in the order list, it comes first
+            if (orderB !== -1) return 1;
+
+            // Otherwise, sort by createdAt (Newest first)
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+
+        return sorted;
     } catch (error) {
         console.error("Error in getEnhancedProjects:", error);
         return PROJECTS;

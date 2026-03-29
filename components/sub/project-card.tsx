@@ -10,6 +10,7 @@ type ProjectCardProps = {
   title: string;
   description: string;
   link: string;
+  createdAt?: string;
 };
 
 export const ProjectCard = ({
@@ -17,6 +18,7 @@ export const ProjectCard = ({
   title,
   description,
   link,
+  createdAt,
 }: ProjectCardProps) => {
   const [imgSrc, setImgSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
@@ -91,6 +93,15 @@ export const ProjectCard = ({
           <p className="mt-2 text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
             {description}
           </p>
+          
+          {createdAt && (
+            <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-white/5 w-fit px-3 py-1 rounded-full border border-white/5">
+              <svg className="w-3 h-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>Uploaded: {new Date(createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short' })}</span>
+            </div>
+          )}
 
           <div className="mt-auto pt-4 flex flex-wrap items-center gap-6">
             <Link
