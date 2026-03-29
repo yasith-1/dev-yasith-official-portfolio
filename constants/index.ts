@@ -264,9 +264,6 @@ export interface Project {
 }
 
 export const PROJECTS_ORDER = [
-  "Library Management System",
-  "Burger Shop POS",
-  "Defense Management System",
 ] as string[];
 
 export const PROJECTS: Project[] = [
