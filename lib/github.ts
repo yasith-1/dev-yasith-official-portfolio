@@ -36,16 +36,27 @@ export async function getGithubReposByTopics(topics: string[]) {
     try {
         const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 300;
 
+        const headers: Record<string, string> = {
+            'User-Agent': 'Portfolio-Website',
+        };
+
+        if (process.env.GITHUB_TOKEN) {
+            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+        }
+
         const response = await fetchWithTimeout(
             `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
             {
-                next: { revalidate: revalidateTime }, // Auto-sync in dev, cache in prod
+                next: { revalidate: revalidateTime },
+                headers,
             },
             10000
         );
 
         if (!response.ok) {
-            throw new Error("Failed to fetch repositories");
+            const errorBody = await response.text().catch(() => "No error body");
+            console.error(`GitHub API error: ${response.status} ${response.statusText}`, errorBody);
+            throw new Error(`Failed to fetch repositories: ${response.status} ${response.statusText}`);
         }
 
         const repos: GithubRepo[] = await response.json();
