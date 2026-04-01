@@ -5,6 +5,7 @@ const Certifications = dynamic(() => import("@/components/main/certifications").
 const Encryption = dynamic(() => import("@/components/main/encryption").then(mod => mod.Encryption));
 const Experience = dynamic(() => import("@/components/main/experience").then(mod => mod.Experience));
 const Projects = dynamic(() => import("@/components/main/projects").then(mod => mod.Projects));
+const SmartNotes = dynamic(() => import("@/components/main/smart-notes").then(mod => mod.SmartNotes));
 const GithubContribution = dynamic(() => import("@/components/main/github-contribution").then(mod => mod.GithubContribution));
 const Skills = dynamic(() => import("@/components/main/skills").then(mod => mod.Skills));
 const Testimonials = dynamic(() => import("@/components/main/testimonials").then(mod => mod.Testimonials));
@@ -18,6 +19,7 @@ export default function Home() {
         <Experience />
         <Skills />
         <Projects />
+        <SmartNotes />
         <Certifications />
         <GithubContribution />
         <Testimonials />

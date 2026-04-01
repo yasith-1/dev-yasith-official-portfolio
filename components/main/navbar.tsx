@@ -9,33 +9,33 @@ export const Navbar = () => {
 
   return (
     <div className="w-full h-[70px] fixed top-0 backdrop-blur-xl bg-[#030014]/50 z-[100] border-b border-white/5 transition-all duration-300">
-      <div className="w-full h-full flex items-center justify-between m-auto px-6 md:px-10 lg:px-20 max-w-[1400px] relative">
-        {/* Logo + Name */}
-        <Link
-          href="#about-me"
-          className="flex flex-row items-center"
-        >
-          <div className="flex items-center justify-center p-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm group hover:border-purple-500/50 transition-all">
-            <span className="text-xl font-bold tracking-tighter text-white">
-              &lt;YP
-              <span className="text-purple-500 group-hover:text-cyan-400 transition-colors">/</span>
-              &gt;
-            </span>
-          </div>
-          <div className="hidden md:block font-bold ml-3 text-gray-300 hover:text-white transition-colors">
-            Yashith Prabhashwara
-          </div>
-        </Link>
+      <div className="w-full h-full flex items-center justify-between m-auto px-6 md:px-10 lg:px-20 max-w-[1400px]">
+        {/* Logo + Name (Left Container) */}
+        <div className="flex-1 flex items-center justify-start">
+          <Link
+            href="#about-me"
+            className="flex flex-row items-center cursor-pointer"
+          >
+            <div className="flex items-center justify-center p-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm group hover:border-purple-500/50 transition-all">
+              <span className="text-xl font-bold tracking-tighter text-white">
+                &lt; Yashith / &gt;
+              </span>
+            </div>
+            <div className="hidden xl:block font-bold ml-3 text-gray-300 hover:text-white transition-colors">
+              {/* Ya shith Prabhashwara */}
+            </div>
+          </Link>
+        </div>
 
-        {/* Web Navbar (Centered) */}
-        <div className="hidden lg:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
-          <div className="flex items-center gap-6 bg-[#030014]/50 border border-white/10 px-6 py-2 rounded-full text-gray-300 text-sm font-medium">
+        {/* Web Navbar (Centered Pillar) */}
+        <div className="hidden lg:flex flex-1 items-center justify-center">
+          <div className="flex items-center gap-3 xl:gap-6 bg-[#030014]/50 border border-white/10 px-4 xl:px-6 py-2 rounded-full text-gray-300 text-[12px] xl:text-sm font-medium">
             {NAV_LINKS.map((link) => (
               link && link.title && (
                 <a
                   key={link.title}
                   href={link.link}
-                  className="cursor-pointer hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300"
+                  className="cursor-pointer hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300 whitespace-nowrap"
                 >
                   {link.title}
                 </a>
@@ -44,8 +44,8 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* Right Section: Socials + Hamburger */}
-        <div className="flex flex-row items-center gap-3">
+        {/* Right Section (Right Container) */}
+        <div className="flex-1 flex flex-row items-center justify-end gap-3">
           {/* Social Icons (Web) */}
           <div className="hidden lg:flex flex-row gap-3">
             {SOCIALS.map(({ link, name, icon: Icon }) => (
@@ -61,7 +61,7 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* Hamburger Menu */}
+          {/* Hamburger Menu (Mobile) */}
           <button
             className="lg:hidden text-white focus:outline-none p-2 rounded-lg bg-white/5 border border-white/10"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

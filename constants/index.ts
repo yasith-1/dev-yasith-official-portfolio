@@ -505,6 +505,10 @@ export const NAV_LINKS = [
     link: "#projects",
   },
   {
+    title: "Smart Notes",
+    link: "#smart-notes",
+  },
+  {
     title: "Certifications",
     link: "#certifications",
   },

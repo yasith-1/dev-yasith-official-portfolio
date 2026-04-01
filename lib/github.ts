@@ -32,7 +32,7 @@ export interface GithubRepo {
     created_at: string;
 }
 
-export async function getGithubProjects() {
+export async function getGithubReposByTopics(topics: string[]) {
     try {
         const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 300;
 
@@ -55,16 +55,21 @@ export async function getGithubProjects() {
                 repo.description &&
                 repo.name.toLowerCase() !== GITHUB_USERNAME.toLowerCase() &&
                 !(repo as any).fork &&
-                repo.topics.includes("portfolio")
+                topics.every(topic => repo.topics.includes(topic))
         );
 
         return filteredRepos.sort((a, b) =>
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
     } catch (error) {
-        console.error("Error fetching GitHub projects:", error);
+        console.error(`Error fetching GitHub repos with topics ${topics}:`, error);
         return [];
     }
+}
+
+export async function getGithubProjects() {
+    const repos = await getGithubReposByTopics(["portfolio"]);
+    return repos.filter(repo => !repo.topics.includes("note"));
 }
 
 /**
@@ -98,6 +103,32 @@ export async function getCustomSocialPreview(repoUrl: string): Promise<string | 
         return null;
     }
 }
+async function transformGithubReposToProjects(repos: GithubRepo[]): Promise<Project[]> {
+    return Promise.all(
+        repos.map(async (repo) => {
+            let cleanRepoName = repo.name;
+            if (cleanRepoName.toLowerCase().startsWith(`${GITHUB_USERNAME.toLowerCase()}-`) || 
+                cleanRepoName.toLowerCase().startsWith(`${GITHUB_USERNAME.toLowerCase()}_`)) {
+                cleanRepoName = cleanRepoName.substring(GITHUB_USERNAME.length + 1);
+            }
+
+            const title = cleanRepoName
+                .split(/[-_]/)
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
+            const customPreview = await getCustomSocialPreview(repo.html_url);
+
+            return {
+                title,
+                description: repo.description,
+                image: customPreview || `https://opengraph.githubassets.com/${repo.id}/${GITHUB_USERNAME}/${repo.name}`,
+                link: repo.html_url,
+                createdAt: repo.created_at,
+            };
+        })
+    );
+}
 
 /**
  * Enhanced function to fetch, filter, and scrape previews in one server-side pass.
@@ -120,30 +151,7 @@ export async function getEnhancedProjects(): Promise<Project[]> {
         );
 
         // 3. Transform dynamic repos
-        const dynamicProjects: Project[] = await Promise.all(
-            githubRepos.map(async (repo) => {
-                let cleanRepoName = repo.name;
-                if (cleanRepoName.toLowerCase().startsWith(`${GITHUB_USERNAME.toLowerCase()}-`) || 
-                    cleanRepoName.toLowerCase().startsWith(`${GITHUB_USERNAME.toLowerCase()}_`)) {
-                    cleanRepoName = cleanRepoName.substring(GITHUB_USERNAME.length + 1);
-                }
-
-                const title = cleanRepoName
-                    .split(/[-_]/)
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ');
-
-                const customPreview = await getCustomSocialPreview(repo.html_url);
-
-                return {
-                    title,
-                    description: repo.description,
-                    image: customPreview || `https://opengraph.githubassets.com/${repo.id}/${GITHUB_USERNAME}/${repo.name}`,
-                    link: repo.html_url,
-                    createdAt: repo.created_at,
-                };
-            })
-        );
+        const dynamicProjects = await transformGithubReposToProjects(githubRepos);
 
         // 4. Merge
         const merged: Project[] = [...staticWithPreviews];
@@ -175,6 +183,19 @@ export async function getEnhancedProjects(): Promise<Project[]> {
     } catch (error) {
         console.error("Error in getEnhancedProjects:", error);
         return PROJECTS;
+    }
+}
+
+export async function getEnhancedNotes(): Promise<Project[]> {
+    try {
+        const githubRepos = await getGithubReposByTopics(["portfolio", "note"]);
+        const dynamicProjects = await transformGithubReposToProjects(githubRepos);
+        return dynamicProjects.sort((a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+    } catch (error) {
+        console.error("Error in getEnhancedNotes:", error);
+        return [];
     }
 }
 
