@@ -94,6 +94,7 @@ export const SmartNotes = () => {
                   title={note.title}
                   description={note.description}
                   link={note.link}
+                  demoLink={note.demoLink}
                   createdAt={note.createdAt}
                 />
               </motion.div>

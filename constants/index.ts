@@ -260,6 +260,7 @@ export interface Project {
   description: string;
   image: string;
   link: string;
+  demoLink?: string;
   createdAt: string;
 }
 

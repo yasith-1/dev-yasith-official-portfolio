@@ -10,6 +10,7 @@ type ProjectCardProps = {
   title: string;
   description: string;
   link: string;
+  demoLink?: string;
   createdAt?: string;
 };
 
@@ -18,45 +19,17 @@ export const ProjectCard = ({
   title,
   description,
   link,
+  demoLink,
   createdAt,
 }: ProjectCardProps) => {
   const [imgSrc, setImgSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
-  const [liveUrl, setLiveUrl] = useState<string | null>(null);
 
   // Update image source if prop changes
   useEffect(() => {
     setImgSrc(src);
     setImgError(false);
   }, [src]);
-
-  useEffect(() => {
-    const fetchGithubHomepage = async () => {
-      try {
-        if (link && link.includes('github.com')) {
-          const urlParts = link.split('/');
-          const ownerIndex = urlParts.indexOf('github.com') + 1;
-          const owner = urlParts[ownerIndex];
-          const repo = urlParts[ownerIndex + 1];
-          
-          if (owner && repo) {
-            const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-            if (res.ok) {
-              const data = await res.json();
-              if (data.homepage && data.homepage.trim() !== "") {
-                const homepageUrl = data.homepage.startsWith('http') ? data.homepage : `https://${data.homepage}`;
-                setLiveUrl(homepageUrl);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.error("Failed to fetch github info", e);
-      }
-    };
-    
-    fetchGithubHomepage();
-  }, [link]);
 
   const fallbackImage = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
 
@@ -121,9 +94,9 @@ export const ProjectCard = ({
               </svg>
             </Link>
 
-            {liveUrl && (
+            {demoLink && (
               <Link
-                href={liveUrl}
+                href={demoLink}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="flex items-center gap-2 text-cyan-400 font-medium text-sm hover:text-cyan-300 transition-colors group/live"

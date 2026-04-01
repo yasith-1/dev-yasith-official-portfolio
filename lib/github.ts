@@ -128,6 +128,10 @@ async function transformGithubReposToProjects(repos: GithubRepo[]): Promise<Proj
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
 
+            const demoLink = repo.homepage && repo.homepage.trim() !== "" 
+                ? (repo.homepage.startsWith('http') ? repo.homepage : `https://${repo.homepage}`)
+                : undefined;
+
             const customPreview = await getCustomSocialPreview(repo.html_url);
 
             return {
@@ -135,6 +139,7 @@ async function transformGithubReposToProjects(repos: GithubRepo[]): Promise<Proj
                 description: repo.description,
                 image: customPreview || `https://opengraph.githubassets.com/${repo.id}/${GITHUB_USERNAME}/${repo.name}`,
                 link: repo.html_url,
+                demoLink,
                 createdAt: repo.created_at,
             };
         })
@@ -167,11 +172,19 @@ export async function getEnhancedProjects(): Promise<Project[]> {
         // 4. Merge
         const merged: Project[] = [...staticWithPreviews];
         dynamicProjects.forEach(dProj => {
-            const isDuplicate = merged.some(sProj =>
+            const existingIndex = merged.findIndex(sProj =>
                 sProj.link.toLowerCase().includes(dProj.link.toLowerCase()) ||
                 sProj.title.toLowerCase() === dProj.title.toLowerCase()
             );
-            if (!isDuplicate) merged.push(dProj);
+
+            if (existingIndex !== -1) {
+                // If static project exists but lacks demoLink, use the one from GitHub
+                if (!merged[existingIndex].demoLink && dProj.demoLink) {
+                    merged[existingIndex].demoLink = dProj.demoLink;
+                }
+            } else {
+                merged.push(dProj);
+            }
         });
 
         // 5. Custom Sort based on PROJECTS_ORDER
