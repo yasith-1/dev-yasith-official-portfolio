@@ -41,7 +41,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         {children}
         <Footer />
         <AIAssistant />
-        <Script id="tawk-to" strategy="afterInteractive">
+        {/* <Script id="tawk-to" strategy="afterInteractive">
           {`
             window.Tawk_API = window.Tawk_API || {};
             window.Tawk_LoadStart = new Date();
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
               s0.parentNode.insertBefore(s1,s0);
             })();
           `}
-        </Script>
+        </Script> */}
       </body>
     </html>
   );
