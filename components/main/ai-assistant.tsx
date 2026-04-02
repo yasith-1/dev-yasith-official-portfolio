@@ -110,7 +110,7 @@ export const AIAssistant = () => {
                     <FaRocket className="text-2xl" />
                   </div>
                   <p className="text-blue-200 text-sm italic">
-                    "Welcome to Orbit. I am Astra, your mission assistant. How can I help you today?"
+                    "Welcome to Orbit. I am Astera, your mission assistant. How can I help you today?"
                   </p>
                 </div>
               )}
@@ -161,7 +161,7 @@ export const AIAssistant = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask Astra..."
+                  placeholder="Ask Astera..."
                   className="flex-1 bg-blue-900/20 border border-blue-500/30 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all placeholder:text-blue-300/50"
                 />
                 <button
