@@ -365,7 +365,7 @@ export const FOOTER_DATA = [
 
 export const JOURNEY = [
   {
-    title: "Full Stack Trainee Software Engineer",
+    title: "Trainee Software Engineer",
     location: "SunDevs",
     description: "Building enterprise-grade applications using Java and Spring Boot with the Vaadin framework. Focused on developing robust full-stack solutions and participating in the complete software development lifecycle during this 6-month internship.",
     icon: null,
