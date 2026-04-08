@@ -365,6 +365,13 @@ export const FOOTER_DATA = [
 
 export const JOURNEY = [
   {
+    title: "Full Stack Trainee Software Engineer",
+    location: "SunDevs",
+    description: "Building enterprise-grade applications using Java and Spring Boot with the Vaadin framework. Focused on developing robust full-stack solutions and participating in the complete software development lifecycle during this 6-month internship.",
+    icon: null,
+    date: "April 2026 - Present",
+  },
+  {
     title: "Intern Software Engineer",
     location: "NEXOVA IT SOLUTIONS",
     description: "Collaboration with a development team to build a POS system. Contributing as a Full-Stack Developer to both frontend and backend development using React and Spring Boot, with MySQL as the database. Involved in API integration & Testing, UI design, and applying OOP and clean code principles.",
