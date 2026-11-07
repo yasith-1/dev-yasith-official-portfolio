@@ -261,6 +261,7 @@ export interface Project {
   image: string;
   link: string;
   demoLink?: string;
+  hideSource?: boolean;
   createdAt: string;
 }
 
@@ -275,6 +276,36 @@ export const PROJECTS: Project[] = [
   //   image: "/projects/project-1.png",
   //   link: "https://github.com/yasith-1",
   // },
+  {
+    title: "SunBot + Discord Integration",
+    description:
+      "A self-hosted, all-in-one Discord bot combining moderation, engagement, tickets, giveaways, music, and custom commands with first-class integrations for game server hosting platforms. Delivered as a single Java deployment with a core-plus-addon architecture. Commercially published on BuiltByBit.",
+    image: "/projects/sunbot.jpeg",
+    link: "https://builtbybit.com/resources/sunbot-all-in-one-discord-bot.106308/",
+    demoLink: "https://builtbybit.com/resources/sunbot-all-in-one-discord-bot.106308/",
+    hideSource: true,
+    createdAt: "2026-09-15T00:00:00Z",
+  },
+  {
+    title: "SunPaste (Paste Management System)",
+    description:
+      "A self-hosted platform for sharing code snippets, text, and developer notes — featuring built-in access controls, a Discord bot, a full REST API, and an admin panel. Built end-to-end with Vaadin, Spring Boot, and H2. Commercially published on BuiltByBit.",
+    image: "/projects/sunpaste.jpeg",
+    link: "https://builtbybit.com/resources/sunpaste-paste-sharing-system.106297/",
+    demoLink: "https://builtbybit.com/resources/sunpaste-paste-sharing-system.106297/",
+    hideSource: true,
+    createdAt: "2026-05-10T00:00:00Z",
+  },
+  {
+    title: "SunStore (E-com Microkernel Project)",
+    description:
+      "A web-based e-commerce platform built on a Micro Kernel architecture for selling subscriptions and merchandise from a self-hosted store. Handles checkout, licensing, delivery, analytics, and PayPal/Stripe payments, with Discord and SunLicense integration. Commercially published on BuiltByBit.",
+    image: "/projects/sunstore.jpeg",
+    link: "https://builtbybit.com/resources/sunstore-digital-product-store.99232/",
+    demoLink: "https://builtbybit.com/resources/sunstore-digital-product-store.99232/",
+    hideSource: true,
+    createdAt: "2026-06-20T00:00:00Z",
+  },
   {
     title: "Library Management System",
     description:
@@ -365,11 +396,11 @@ export const FOOTER_DATA = [
 
 export const JOURNEY = [
   {
-    title: "Trainee Software Engineer",
+    title: "Intern Software Engineer",
     location: "SunDevs",
     description: "Building enterprise-grade applications using Java and Spring Boot with the Vaadin framework. Focused on developing robust full-stack solutions and participating in the complete software development lifecycle during this 6-month internship.",
     icon: null,
-    date: "April 2026 - Present",
+    date: "April 2026 - Oct 2026",
   },
   {
     title: "Intern Software Engineer",

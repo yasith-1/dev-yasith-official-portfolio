@@ -11,6 +11,7 @@ type ProjectCardProps = {
   description: string;
   link: string;
   demoLink?: string;
+  hideSource?: boolean;
   createdAt?: string;
 };
 
@@ -20,8 +21,11 @@ export const ProjectCard = ({
   description,
   link,
   demoLink,
+  hideSource,
   createdAt,
 }: ProjectCardProps) => {
+  // When the source link is hidden, make the image/title point to the live demo instead.
+  const primaryLink = hideSource && demoLink ? demoLink : link;
   const [imgSrc, setImgSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
 
@@ -41,7 +45,7 @@ export const ProjectCard = ({
     >
       <div className="flex flex-col h-full overflow-hidden rounded-[24px] border border-white/5 bg-[#030014]/40 backdrop-blur-2xl transition-all duration-500 group-hover:border-purple-500/50 group-hover:shadow-[0_0_50px_rgba(112,66,248,0.2)]">
         <Link
-          href={link}
+          href={primaryLink}
           target="_blank"
           rel="noreferrer noopener"
           className="relative aspect-video w-full overflow-hidden block"
@@ -58,7 +62,7 @@ export const ProjectCard = ({
         </Link>
 
         <div className="flex flex-col flex-grow p-5 z-10">
-          <Link href={link} target="_blank" rel="noreferrer noopener" className="w-fit">
+          <Link href={primaryLink} target="_blank" rel="noreferrer noopener" className="w-fit">
             <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:from-purple-400 group-hover:to-cyan-400 transition-all duration-300 hover:opacity-80">
               {title}
             </h2>
@@ -77,22 +81,24 @@ export const ProjectCard = ({
           )}
 
           <div className="mt-auto pt-4 flex flex-wrap items-center gap-6">
-            <Link
-              href={link}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center gap-2 text-purple-400 font-medium text-sm hover:text-purple-300 transition-colors group/link"
-            >
-              <span>View Source</span>
-              <svg
-                className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            {!hideSource && (
+              <Link
+                href={link}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="flex items-center gap-2 text-purple-400 font-medium text-sm hover:text-purple-300 transition-colors group/link"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </Link>
+                <span>View Source</span>
+                <svg
+                  className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            )}
 
             {demoLink && (
               <Link

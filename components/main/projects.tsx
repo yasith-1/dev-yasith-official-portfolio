@@ -95,6 +95,7 @@ export const Projects = () => {
                   description={project.description}
                   link={project.link}
                   demoLink={project.demoLink}
+                  hideSource={project.hideSource}
                   createdAt={project.createdAt}
                 />
               </motion.div>

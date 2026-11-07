@@ -20,6 +20,13 @@
 .DS_Store
 *.pem
 
+# IDE (JetBrains / IntelliJ / WebStorm / Rider)
+.idea/
+*.iml
+
+# IDE (VS Code)
+.vscode/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
