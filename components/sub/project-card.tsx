@@ -43,7 +43,7 @@ export const ProjectCard = ({
       transition={{ duration: 0.3 }}
       className="relative group h-full"
     >
-      <div className="flex flex-col h-full overflow-hidden rounded-[24px] border border-white/5 bg-[#030014]/40 backdrop-blur-2xl transition-all duration-500 group-hover:border-purple-500/50 group-hover:shadow-[0_0_50px_rgba(112,66,248,0.2)]">
+      <div className="flex flex-col h-full overflow-hidden rounded-[24px] border border-white/15 md:border-white/5 bg-[#030014]/40 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] md:shadow-none transition-all duration-500 group-hover:border-purple-500/50 group-hover:shadow-[0_0_50px_rgba(112,66,248,0.2)]">
         <Link
           href={primaryLink}
           target="_blank"
