@@ -45,10 +45,10 @@ export const HeroContent = () => {
           variants={slideInFromLeft(0.5) as any}
           className="flex flex-col gap-1 mt-4"
         >
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-white tracking-tighter font-sans leading-none">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tighter font-sans leading-none">
             Yashith
           </h1>
-          <h1 className="text-[34px] sx:text-[40px] sm:text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] tracking-tighter pb-2 sm:pb-4 font-sans leading-tight drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+          <h1 className="text-[34px] sx:text-[40px] sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 bg-[length:200%_auto] animate-[gradient_8s_linear_infinite] tracking-tighter pb-2 sm:pb-4 font-sans leading-tight drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
             Prabhashwara
           </h1>
         </motion.div>

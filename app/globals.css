@@ -98,7 +98,7 @@ html {
 }
 
 .pill-badge {
-  @apply rounded-full px-4 py-1 flex items-center gap-2 text-sm backdrop-blur-md;
+  @apply rounded-[15px] px-4 py-2 flex items-center gap-2 text-sm backdrop-blur-md;
   background: rgba(10, 10, 20, 0.6);
   border: 1px solid rgba(186, 156, 255, 0.2);
 }
