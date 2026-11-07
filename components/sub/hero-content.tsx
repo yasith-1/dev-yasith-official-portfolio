@@ -69,10 +69,8 @@ export const HeroContent = () => {
           variants={slideInFromLeft(0.8) as any}
           className="text-sm sm:text-base lg:text-lg text-gray-400 my-2 max-w-[600px] leading-relaxed font-sans"
         >
-          Passionate <span className="text-white font-medium">Software Engineer</span> with hands-on experience in full-stack development.
-          Proficient in building robust, user-centered solutions using <span className="text-white font-medium italic">Java (Spring Boot)</span>,
-          <span className="text-white font-medium italic"> React , JS , Node.JS , Express.JS</span>,
-          <span className="text-white font-medium italic"> Angular</span>, and modern web technologies.
+          <span className="text-white font-medium">Associate Software Engineer</span> with 1 year of professional experience across two product-based internships, specializing in <span className="text-white font-medium italic">Java &amp; Spring Boot</span> backend development.
+          I build robust, scalable full-stack solutions with <span className="text-white font-medium italic">Spring Boot, React, REST APIs, Docker</span> and <span className="text-white font-medium italic">CI/CD</span> — while expanding into <span className="text-white font-medium italic">cloud &amp; DevOps</span> with <span className="text-white font-medium italic">AWS</span> and <span className="text-white font-medium italic">Kubernetes</span>.
         </motion.p>
 
         {/* Seeking Box */}
