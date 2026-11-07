@@ -261,6 +261,7 @@ export interface Project {
   image: string;
   link: string;
   demoLink?: string;
+  demoLabel?: string;
   hideSource?: boolean;
   createdAt: string;
 }
@@ -283,6 +284,7 @@ export const PROJECTS: Project[] = [
     image: "/projects/sunbot.jpeg",
     link: "https://builtbybit.com/resources/sunbot-all-in-one-discord-bot.106308/",
     demoLink: "https://builtbybit.com/resources/sunbot-all-in-one-discord-bot.106308/",
+    demoLabel: "View Product & Purchase",
     hideSource: true,
     createdAt: "2026-09-15T00:00:00Z",
   },
@@ -293,6 +295,7 @@ export const PROJECTS: Project[] = [
     image: "/projects/sunpaste.jpeg",
     link: "https://builtbybit.com/resources/sunpaste-paste-sharing-system.106297/",
     demoLink: "https://builtbybit.com/resources/sunpaste-paste-sharing-system.106297/",
+    demoLabel: "View Product & Purchase",
     hideSource: true,
     createdAt: "2026-05-10T00:00:00Z",
   },
@@ -303,6 +306,7 @@ export const PROJECTS: Project[] = [
     image: "/projects/sunstore.jpeg",
     link: "https://builtbybit.com/resources/sunstore-digital-product-store.99232/",
     demoLink: "https://builtbybit.com/resources/sunstore-digital-product-store.99232/",
+    demoLabel: "View Product & Purchase",
     hideSource: true,
     createdAt: "2026-06-20T00:00:00Z",
   },

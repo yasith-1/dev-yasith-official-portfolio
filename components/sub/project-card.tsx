@@ -11,6 +11,7 @@ type ProjectCardProps = {
   description: string;
   link: string;
   demoLink?: string;
+  demoLabel?: string;
   hideSource?: boolean;
   createdAt?: string;
 };
@@ -21,6 +22,7 @@ export const ProjectCard = ({
   description,
   link,
   demoLink,
+  demoLabel,
   hideSource,
   createdAt,
 }: ProjectCardProps) => {
@@ -86,7 +88,7 @@ export const ProjectCard = ({
                 href={link}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="flex items-center gap-2 text-purple-400 font-medium text-sm hover:text-purple-300 transition-colors group/link"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-purple-500/15 border border-purple-400/30 text-purple-300 font-semibold text-sm hover:bg-purple-500/25 hover:text-purple-200 hover:border-purple-400/50 transition-all group/link"
               >
                 <span>View Source</span>
                 <svg
@@ -105,13 +107,13 @@ export const ProjectCard = ({
                 href={demoLink}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="flex items-center gap-2 text-cyan-400 font-medium text-sm hover:text-cyan-300 transition-colors group/live"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 font-semibold text-sm hover:bg-cyan-500/25 hover:text-cyan-200 hover:border-cyan-400/50 transition-all group/live"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                 </span>
-                <span>View Live</span>
+                <span>{demoLabel ?? "View Live"}</span>
                 <svg
                   className="w-4 h-4 transform group-hover/live:translate-x-1 group-hover/live:-translate-y-1 transition-transform"
                   fill="none"

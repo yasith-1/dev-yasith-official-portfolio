@@ -125,11 +125,11 @@ const CertificationCard = ({ cert, index }: { cert: typeof CERTIFICATIONS[number
                 <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-4">
                     <button
                         onClick={() => window.open(cert.link, '_blank')}
-                        className="flex items-center gap-3 text-gray-400 hover:text-white transition-all duration-500 group/btn"
+                        className="flex items-center gap-3 cursor-pointer text-purple-200 hover:text-white transition-all duration-500 group/btn"
                     >
-                        <span className="text-[13px] font-black tracking-widest uppercase">View Full Credential</span>
+                        <span className="text-[13px] font-black tracking-widest uppercase underline decoration-purple-400/40 decoration-2 underline-offset-4 group-hover/btn:decoration-purple-300">View Full Credential</span>
                         <div className="relative">
-                            <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover/btn:bg-purple-500 group-hover/btn:text-white group-hover/btn:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500 ">
+                            <div className="p-2 rounded-xl bg-purple-500/20 border border-purple-400/40 text-purple-200 shadow-[0_0_12px_rgba(168,85,247,0.2)] group-hover/btn:bg-purple-500 group-hover/btn:text-white group-hover/btn:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500 ">
                                 <RxExternalLink className="w-4 h-4" />
                             </div>
                         </div>

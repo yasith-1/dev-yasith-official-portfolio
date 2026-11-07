@@ -122,11 +122,11 @@ const BadgeCard = ({ badge, index }: { badge: typeof BADGES[number], index: numb
                 <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
                     <button
                         onClick={() => window.open(badge.credentialLink, '_blank')}
-                        className="flex items-center gap-3 text-gray-400 hover:text-white transition-all duration-500 group/btn"
+                        className="flex items-center gap-3 cursor-pointer text-purple-200 hover:text-white transition-all duration-500 group/btn"
                     >
-                        <span className="text-[12px] font-black tracking-widest uppercase">Show Credentials</span>
+                        <span className="text-[12px] font-black tracking-widest uppercase underline decoration-purple-400/40 decoration-2 underline-offset-4 group-hover/btn:decoration-purple-300">Show Credentials</span>
                         <div className="relative">
-                            <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover/btn:bg-purple-500 group-hover/btn:text-white group-hover/btn:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500">
+                            <div className="p-2 rounded-xl bg-purple-500/20 border border-purple-400/40 text-purple-200 shadow-[0_0_12px_rgba(168,85,247,0.2)] group-hover/btn:bg-purple-500 group-hover/btn:text-white group-hover/btn:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500">
                                 <RxExternalLink className="w-4 h-4" />
                             </div>
                         </div>
@@ -137,12 +137,12 @@ const BadgeCard = ({ badge, index }: { badge: typeof BADGES[number], index: numb
                             <a
                                 href={badge.qr}
                                 download={`${badge.credentialLink.split("/").pop()}-qr.png`}
-                                className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 transition-all duration-300 group/dl"
+                                className="flex items-center gap-2 cursor-pointer text-cyan-200 hover:text-cyan-100 transition-all duration-300 group/dl"
                                 title="Download QR code"
                                 aria-label="Download QR code"
                             >
                                 <span className="text-[12px] font-black tracking-widest uppercase hidden sm:inline">QR</span>
-                                <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover/dl:bg-cyan-500/20 group-hover/dl:border-cyan-400/40 group-hover/dl:shadow-[0_0_20px_rgba(34,211,238,0.35)] transition-all duration-300">
+                                <div className="p-2 rounded-xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.2)] group-hover/dl:bg-cyan-500/40 group-hover/dl:border-cyan-300/60 group-hover/dl:shadow-[0_0_20px_rgba(34,211,238,0.45)] transition-all duration-300">
                                     <FaDownload className="w-3.5 h-3.5" />
                                 </div>
                             </a>
