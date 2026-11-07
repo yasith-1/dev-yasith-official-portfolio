@@ -2,6 +2,7 @@ import { Hero } from "@/components/main/hero";
 import dynamic from "next/dynamic";
 
 const Certifications = dynamic(() => import("@/components/main/certifications").then(mod => mod.Certifications));
+const Badges = dynamic(() => import("@/components/main/badges").then(mod => mod.Badges));
 const Encryption = dynamic(() => import("@/components/main/encryption").then(mod => mod.Encryption));
 const Experience = dynamic(() => import("@/components/main/experience").then(mod => mod.Experience));
 const Projects = dynamic(() => import("@/components/main/projects").then(mod => mod.Projects));
@@ -21,6 +22,7 @@ export default function Home() {
         <Projects />
         <SmartNotes />
         <Certifications />
+        <Badges />
         <GithubContribution />
         <Testimonials />
       </div>

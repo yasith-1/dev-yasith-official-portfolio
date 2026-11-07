@@ -526,6 +526,41 @@ export const CERTIFICATIONS = [
 ] as const;
 
 
+export interface Badge {
+  title: string;
+  organization: string;
+  issued: string;
+  credentialLink: string;
+  image: string;
+  qr?: string;
+}
+
+export const BADGES: Badge[] = [
+  {
+    title: "CertDirectory Workshop - Building Resilient & Reliable Data Pipelines in Production",
+    organization: "CertDirectory.io",
+    issued: "Oct 2026",
+    credentialLink: "https://credentials.certdirectory.io/verify/CRD-NFLLCJ7X",
+    image: "/badges/CRD-NFLLCJ7X-baked.png",
+    qr: "/badges/QR-Building-Resilient.png",
+  },
+  {
+    title: "CertDirectory Meetup - How to Use AI for Business Problem Solving",
+    organization: "CertDirectory.io",
+    issued: "Sep 2026",
+    credentialLink: "https://credentials.certdirectory.io/verify/CRD-SDEWFAZL",
+    image: "/badges/CRD-SDEWFAZL-baked.png",
+    qr: "/badges/QR-How-to-Use-AI-for-Business.png",
+  },
+  {
+    title: "Building Production Ready Scalable Container Solutions using AWS ECS with AWS Native CI/CD Workflows",
+    organization: "FOSS Community - University of Kelaniya",
+    issued: "May 2026",
+    credentialLink: "https://credentials.certdirectory.io/verify/CRD-G4HM4FJQ",
+    image: "/badges/CRD-G4HM4FJQ-baked.png",
+  },
+];
+
 export const NAV_LINKS = [
   {
     title: "About me",
@@ -550,6 +585,10 @@ export const NAV_LINKS = [
   {
     title: "Certifications",
     link: "#certifications",
+  },
+  {
+    title: "Badges",
+    link: "#badges",
   },
   {
     title: "Recommendation",
