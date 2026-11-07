@@ -7,17 +7,41 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as random from "maath/random";
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, Suspense, useMemo, useEffect } from "react";
 import type { Points as PointsType } from "three";
 
-export const StarBackground = (props: PointsInstancesProps) => {
+// Respect the user's reduced-motion preference (accessibility + battery/CPU on mobile).
+const usePrefersReducedMotion = () => {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
+};
+
+type StarBackgroundProps = PointsInstancesProps & {
+  count?: number;
+  animate?: boolean;
+};
+
+export const StarBackground = ({
+  count = 1000,
+  animate = true,
+  ...props
+}: StarBackgroundProps) => {
   const ref = useRef<PointsType | null>(null);
-  const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(3000), { radius: 1.2 }),
+  // Memoize so the point cloud isn't reallocated on every render.
+  const sphere = useMemo(
+    () => random.inSphere(new Float32Array(count * 3), { radius: 1.2 }) as Float32Array,
+    [count],
   );
 
   useFrame((_state, delta) => {
-    if (ref.current) {
+    if (animate && ref.current) {
       ref.current.rotation.x -= delta / 12;
       ref.current.rotation.y -= delta / 18;
     }
@@ -28,7 +52,7 @@ export const StarBackground = (props: PointsInstancesProps) => {
       <Points
         ref={ref}
         stride={3}
-        positions={new Float32Array(sphere)}
+        positions={sphere}
         frustumCulled
         {...props}
       >
@@ -44,17 +68,25 @@ export const StarBackground = (props: PointsInstancesProps) => {
   );
 };
 
-export const StarsCanvas = () => (
-  <div className="w-full h-auto fixed inset-0 -z-10">
-    <Canvas
-      camera={{ position: [0, 0, 1] }}
-      dpr={[1, 1.5]}
-      gl={{ antialias: false, powerPreference: "high-performance" }}
-    >
-      <Suspense fallback={null}>
-        <StarBackground />
-      </Suspense>
-    </Canvas>
-  </div>
-);
+export const StarsCanvas = () => {
+  const reduced = usePrefersReducedMotion();
+  // Slightly fewer points on small screens; identical look on desktop.
+  const [count, setCount] = useState(1000);
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) setCount(700);
+  }, []);
 
+  return (
+    <div className="w-full h-auto fixed inset-0 -z-10">
+      <Canvas
+        camera={{ position: [0, 0, 1] }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
+      >
+        <Suspense fallback={null}>
+          <StarBackground count={count} animate={!reduced} />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+};
