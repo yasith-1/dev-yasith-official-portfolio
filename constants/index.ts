@@ -541,6 +541,14 @@ export interface Badge {
 
 export const BADGES: Badge[] = [
   {
+    title: "CertDirectory Meetup - Gained strategic insight into the operational framework of professional tech communities",
+    organization: "CertDirectory.io",
+    issued: "Nov 2026",
+    credentialLink: "https://credentials.certdirectory.io/verify/CRD-DRQ3PD7G",
+    image: "/badges/CRD-DRQ3PD7G-baked.png",
+    qr: "/badges/QR-CRD-DRQ3PD7G-baked.png",
+  },
+  {
     title: "CertDirectory Workshop - Building Resilient & Reliable Data Pipelines in Production",
     organization: "CertDirectory.io",
     issued: "Oct 2026",
