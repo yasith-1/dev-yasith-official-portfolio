@@ -34,7 +34,7 @@ export interface GithubRepo {
 
 export async function getGithubReposByTopics(topics: string[]) {
     try {
-        const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 300;
+        const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 120;
 
         const headers: Record<string, string> = {
             'User-Agent': 'Portfolio-Website',
@@ -88,7 +88,7 @@ export async function getGithubProjects() {
  */
 export async function getCustomSocialPreview(repoUrl: string): Promise<string | null> {
     try {
-        const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 300;
+        const revalidateTime = process.env.NODE_ENV === "development" ? 0 : 120;
         
         const response = await fetchWithTimeout(repoUrl, {
             next: { revalidate: revalidateTime },
